@@ -401,9 +401,73 @@ function hexUpdate(n) {
         tex = "#" + tex;
         colorI.value = tex;
         getCols();
-    }else if(tex.length == 7){
+    } else if (tex.length == 7) {
         colorI.value = tex;
         getCols();
     }
-    
+
 }
+
+// function you can use:
+function getID(str) {
+    var string = str.split('#')[1];
+    console.log(string);
+    if (string != undefined) {
+        return {
+            c1: string.substring(0, 6),
+            c2: string.substring(6, 12),
+            c3: string.substring(12, 18),
+            c4: string.substring(18, 24),
+            c5: string.substring(24, 30),
+        };
+    } else {
+        return null;
+    }
+}
+// use the function:
+
+
+function load() {
+    var hex = getID(window.location.href);
+    console.log(hex);
+    var colorI1 = document.getElementById("col1");
+    var colorI2 = document.getElementById("col2");
+    var colorI3 = document.getElementById("col3");
+    var colorI4 = document.getElementById("col4");
+    var colorI5 = document.getElementById("col5");
+    if (hex != null) {
+        colorI1.value = "#" + hex.c1;
+        colorI2.value = "#" + hex.c2;
+        colorI3.value = "#" + hex.c3;
+        colorI4.value = "#" + hex.c4;
+        colorI5.value = "#" + hex.c5;
+    }
+    getCols();
+}
+function copyUrl() {
+    var cI1 = document.getElementById("col1").value.substring(1,7);
+    var cI2 = document.getElementById("col2").value.substring(1,7);
+    var cI3 = document.getElementById("col3").value.substring(1,7);
+    var cI4 = document.getElementById("col4").value.substring(1,7);
+    var cI5 = document.getElementById("col5").value.substring(1,7);
+    var text = "http://127.0.0.1:5500/index.html#" + cI1 + cI2 + cI3 + cI4 + cI5;
+    copy(text);
+
+    var linkIcon = document.getElementById("linkIcon");
+    linkIcon.classList.add("pos-down");
+
+    window.location.href = text;
+
+    setTimeout(function () {
+        linkIcon.classList.remove("pos-down");
+    }, 100);
+}
+
+function copy(value){
+    var input_temp = document.createElement("input");
+    input_temp.value = value;
+    document.body.appendChild(input_temp);
+    input_temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(input_temp);
+  };

@@ -11,7 +11,7 @@ input[type="color"] {
 input[type="text"] {
     display: block;
     width: 12.5vw;
-    background: #ebebeb;
+    background: #ebebebd0;
     color: #808080;
     border: none;
     border-radius: 0vw 0vw 1.2vw 1.2vw;
@@ -19,8 +19,8 @@ input[type="text"] {
     padding-bottom: 1vw;
     text-align: center;
     font-family: 'Varela Round', sans-serif;
-    margin-bottom:-1vh;
     outline: none;
+    font-size: 1vw;
 }
 input[type="text"]:focus{
     border: none;
@@ -31,7 +31,7 @@ input[type="text"]:focus{
     display: inline-block;
     width: 12.5vw;
     margin:.35vw;
-    border-radius: 1.2vw 1.2vw 1.6vw 1.6vw;
+    border-radius: 1.2vw 1.2vw 1.2vw 1.2vw;
     transition: background-color 0.4s;
 }
 .hovfx:hover{
@@ -47,7 +47,7 @@ input[type="text"]:focus{
     color: #808080;
 }
 .settings{
-    margin-top:2vh;
+    margin-top:3vh;
     -webkit-user-select: none; /* Safari */        
 -moz-user-select: none; /* Firefox */
 -ms-user-select: none; /* IE10+/Edge */
@@ -65,6 +65,7 @@ user-select: none; /* Standard */
 }
 body{
     font-family: 'Varela Round', sans-serif;
+    font-size: 2vw;
 }
 .pos-down{
     position: relative;
@@ -77,7 +78,7 @@ i{
     
 }
 .icon{    
-    width: 10vw;
+    width: 5vw;
     text-align: center;
     display: inline-block;
 }
