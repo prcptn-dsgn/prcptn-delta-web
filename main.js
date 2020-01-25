@@ -1,4 +1,6 @@
+var mode = "light";
 var checked = false;
+var faved = false;
 var hDif = {
     c1: 0,
     c2: 0,
@@ -329,20 +331,20 @@ function rand() {
         colorI5.value = getRandomColor();
 
         getCols();
-        randIcon.classList.add("shake");
+        randIcon.classList.add("pos-down");
         setTimeout(function () {
-            randIcon.classList.remove("shake");
-        }, 300);
+            randIcon.classList.remove("pos-down");
+        }, 100);
     } else {
         var colorI3 = document.getElementById("col3");
         colorI3.value = getRandomColor();
 
         setCols();
         swatchUpdate();
-        randIcon.classList.add("shake");
+        randIcon.classList.add("pos-down");
         setTimeout(function () {
-            randIcon.classList.remove("shake");
-        }, 300);
+            randIcon.classList.remove("pos-down");
+        }, 100);
     }
 }
 
@@ -388,6 +390,14 @@ function HSLToHex(h, s, l) {
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+function getRandomString() {
+    var letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var color = '';
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
@@ -443,14 +453,15 @@ function load() {
         colorI5.value = "#" + hex.c5;
     }
     getCols();
+    updateMode();
 }
 function copyUrl() {
-    var cI1 = document.getElementById("col1").value.substring(1,7);
-    var cI2 = document.getElementById("col2").value.substring(1,7);
-    var cI3 = document.getElementById("col3").value.substring(1,7);
-    var cI4 = document.getElementById("col4").value.substring(1,7);
-    var cI5 = document.getElementById("col5").value.substring(1,7);
-    var text = "http://127.0.0.1:5500/index.html#" + cI1 + cI2 + cI3 + cI4 + cI5;
+    var cI1 = document.getElementById("col1").value.substring(1, 7);
+    var cI2 = document.getElementById("col2").value.substring(1, 7);
+    var cI3 = document.getElementById("col3").value.substring(1, 7);
+    var cI4 = document.getElementById("col4").value.substring(1, 7);
+    var cI5 = document.getElementById("col5").value.substring(1, 7);
+    var text = "http://prcptn.us/delta/#" + cI1 + cI2 + cI3 + cI4 + cI5;
     copy(text);
 
     var linkIcon = document.getElementById("linkIcon");
@@ -463,11 +474,128 @@ function copyUrl() {
     }, 100);
 }
 
-function copy(value){
+function copy(value) {
     var input_temp = document.createElement("input");
     input_temp.value = value;
     document.body.appendChild(input_temp);
     input_temp.select();
     document.execCommand("copy");
     document.body.removeChild(input_temp);
-  };
+};
+function copyCss() {
+    var cI1 = document.getElementById("col1").value;
+    var cI2 = document.getElementById("col2").value;
+    var cI3 = document.getElementById("col3").value;
+    var cI4 = document.getElementById("col4").value;
+    var cI5 = document.getElementById("col5").value;
+    var text = "/* Usage: 'color: var(--1)' */ :root { --c1:" + cI1 + "; --c2:" + cI2 + "; --c3:" + cI3 + "; --c4:" + cI4 + "; --c5:" + cI5 + ";}";
+    copy(text);
+
+    var cssIcon = document.getElementById("cssIcon");
+    cssIcon.classList.add("pos-down");
+    setTimeout(function () {
+        cssIcon.classList.remove("pos-down");
+    }, 100);
+}
+function get_cookies_array() {
+
+    var cookies = {};
+
+    if (document.cookie && document.cookie != '') {
+        var split = document.cookie.split(';');
+        for (var i = 0; i < split.length; i++) {
+            var name_value = split[i].split("=");
+            name_value[0] = name_value[0].replace(/^ /, '');
+            cookies[decodeURIComponent(name_value[0])] = decodeURIComponent(name_value[1]);
+        }
+    }
+
+    return cookies;
+
+}
+var arr = [
+];
+function refreshCookies(){
+    var cookies = get_cookies_array();
+    
+    for (var name in cookies) {
+        arr.push(cookies[name]);
+    }
+    arr.shift();
+    arr.pop();
+    console.log(arr);
+}
+refreshCookies();
+
+function favPalette() {
+    var cI1 = document.getElementById("col1").value.substring(1, 7);
+    var cI2 = document.getElementById("col2").value.substring(1, 7);
+    var cI3 = document.getElementById("col3").value.substring(1, 7);
+    var cI4 = document.getElementById("col4").value.substring(1, 7);
+    var cI5 = document.getElementById("col5").value.substring(1, 7);
+    var newCookie = cI1 + cI2 + cI3 + cI4 + cI5;
+    document.cookie = getRandomString() + "=" +  newCookie;
+    arr.push(newCookie);
+    console.log(arr);
+}
+function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+if(getCookie("mode") == null){
+    document.cookie = 'mode = light';
+}
+console.log(document.cookie);
+mode = getCookie("mode");
+function switchMode(){
+    if (mode == "light") {
+        mode = "dark";
+        updateMode();
+        document.cookie = 'mode = dark';
+
+    } else if (mode == "dark") {
+        mode = "light";
+        updateMode();
+        document.cookie = 'mode = light';
+
+    }
+    console.log(document.cookie);
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return null;
+}
+function updateMode(){
+    if (mode == "light") {
+
+        document.documentElement.style.setProperty('--bgc', '#363636d0');
+        document.documentElement.style.setProperty('--col', 'white');
+        document.documentElement.style.setProperty('--bg', '#160f1d');
+        document.getElementById("sunIcon").classList.replace("fa-moon", "fa-sun");
+
+    } else if (mode == "dark") {
+        document.documentElement.style.setProperty('--bgc', '#ebebebd0');
+        document.documentElement.style.setProperty('--col', '#808080');
+        document.documentElement.style.setProperty('--bg', 'white');
+        document.getElementById("sunIcon").classList.replace("fa-sun", "fa-moon");
+
+    }
+}
+setTimeout(function(){ document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
