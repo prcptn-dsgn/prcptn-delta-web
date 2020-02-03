@@ -1,0 +1,68 @@
+.cl-wrap {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    transform: translateZ(10px);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.cl-main {
+    position: relative;
+    background: white;
+    color: black;
+    width: 40vw;
+    height: 80vh;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 1vw;
+    text-align: center;
+    box-shadow: 0px 0 50px rgba(0, 0, 0, 0.473);
+    overflow: hidden;
+}
+
+.cl-h {
+    font-size: 5vh;
+    position: absolute;
+    color: black;
+    background-color: white;
+    width: 100%;
+    padding-top: 3vh;
+    box-shadow: 0px 3vh 3vh var(--col);
+    z-index: 9;
+}
+
+.cl-inner {
+    width: 95%;
+    margin: auto;
+    height: 81%;
+    padding-top: 100px;
+    overflow: auto;
+}
+
+.cl-inner::-webkit-scrollbar {
+    width: 1vw;
+}
+
+.cl-inner::-webkit-scrollbar-track {
+}
+
+.cl-inner::-webkit-scrollbar-thumb {
+    background-color: var(--bgc);
+}
+li{
+    padding-bottom: 2vh;
+}
+.cl-i{
+    color: black;
+    position: absolute;
+    transform: translate(17vw, 2vh);
+    z-index: 10;
+}
+.cl-i:hover{
+    transform: translate(17vw, 1.6vh);
+}
