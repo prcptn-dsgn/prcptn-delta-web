@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>prcptn delta</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="settings.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/0ee0232d59.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="animate.css" />
+  </head>
+
+  <body onload="load()" onscroll="getScrollX()">
+    <div class="header">settings</div>
+    <div class="backIcon" onclick="window.location.href = 'palettes.html'"><i class="fas fa-arrow-left"></i></div>
+    <div class="settingsS" id="settings">
+      <div style="display: inline;" class=" settIcon" onclick="switchMode()"><i class="fas fa-sun" id="sunIcon"></i></div> <div class="smallText">change color mode</div>
+      <br> <br>
+      <div class=" settIcon" style="display: inline;">
+        <i class="fas fa-trash-alt" onclick="deleteAllCookies()"></i>
+      </div><div class="smallText">clear all palettes</div>
+      <br> <br>
+      <div class=" settIcon" style="display: inline;">
+        <i class="fas fa-clipboard-list" onclick="window.location.href='changelog.html'"></i>
+      </div><div class="smallText">view changelog</div>
+      <br><br>      
+      <div class="smallrText">version 1.1</div>
+      
+    </div>
+  </body>
+</html>

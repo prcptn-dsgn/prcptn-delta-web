@@ -35,36 +35,10 @@ function refreshCookies() {
 refreshCookies();
 
 function load() {
-    document.getElementById("main").innerHTML = document.getElementById("defaultCont").innerHTML;
-    for (let i = 0; i < val.length; i++) {
-        const code = val[i];
-        const name = nam[i];
-        if (code.length == 30) {
 
-            var h1 = code.substring(0, 6);
-            var h2 = code.substring(6, 12);
-            var h3 = code.substring(12, 18);
-            var h4 = code.substring(18, 24);
-            var h5 = code.substring(24, 30);
-            createDiv(h1, h2, h3, h4, h5, name);
-            console.log(code);
-        }
-    }
-    getScrollX()
     
 updateMode();
 
-}
-function createDiv(h1, h2, h3, h4, h5, name) {
-
-    document.getElementById("main").innerHTML =
-        '<div class="group"><i class="fas fa-times delete" onclick="deleteCookie(' + "'" + name + "'" + ')" style="color:' + getContrast(h5) +'"></i><a href="index.html#' + h1 + h2 + h3 + h4 + h5 + '"><div class="color" style="background: ' + "#" + h1 +
-        ';"></div><div class="color" style="background: ' + "#" + h2 +
-        ';"></div><div class="color" style="background: ' + "#" + h3 +
-        ';"></div><div class="color" style="background: ' + "#" + h4 +
-        ';"></div><div class="color" style="background: ' + "#" + h5 +
-        ';"></div></a></div>' +
-        document.getElementById("main").innerHTML;
 }
 
 function deleteCookie(name) {
@@ -168,15 +142,4 @@ function refreshPalettes(){
     load();
 }
 setTimeout(function(){ document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
-console.log(document.cookie);
-
-tippy('[data-tippy-content]',{
-    
-    arrow:true,
-    delay: [500, 0],
-    inertia: true,
-    placement: 'right',
-    theme: 'delta',
-    animation: 'rotate',
-    arrowType: 'roundArrow'
-});
+console.log(document.cookie)

@@ -21,6 +21,11 @@ var sDif = {
     c4: 0,
     c5: 0
 };
+var c1lock = false;
+var c2lock = false;
+var c3lock = false;
+var c4lock = false;
+var c5lock = false;
 function getCols() {
     if (checked == false) {
         var colorI1 = document.getElementById("col1");
@@ -263,6 +268,12 @@ function swatchUpdate() {
     wrap3.style.backgroundColor = colorI3.value;
     wrap4.style.backgroundColor = colorI4.value;
     wrap5.style.backgroundColor = colorI5.value;
+
+    document.getElementById("lockIcon1").style.color = getContrast(colorI1.value);
+    document.getElementById("lockIcon2").style.color = getContrast(colorI2.value);
+    document.getElementById("lockIcon3").style.color = getContrast(colorI3.value);
+    document.getElementById("lockIcon4").style.color = getContrast(colorI4.value);
+    document.getElementById("lockIcon5").style.color = getContrast(colorI5.value);
 }
 
 function hexToHSL(H) {
@@ -453,7 +464,7 @@ function load() {
         colorI5.value = "#" + hex.c5;
     }
     getCols();
-    updateMode();
+    updateMode(); clload();
 }
 function copyUrl() {
     var cI1 = document.getElementById("col1").value.substring(1, 7);
@@ -515,9 +526,9 @@ function get_cookies_array() {
 }
 var arr = [
 ];
-function refreshCookies(){
+function refreshCookies() {
     var cookies = get_cookies_array();
-    
+
     for (var name in cookies) {
         arr.push(cookies[name]);
     }
@@ -534,7 +545,7 @@ function favPalette() {
     var cI4 = document.getElementById("col4").value.substring(1, 7);
     var cI5 = document.getElementById("col5").value.substring(1, 7);
     var newCookie = cI1 + cI2 + cI3 + cI4 + cI5;
-    document.cookie = getRandomString() + "=" +  newCookie;
+    document.cookie = getRandomString() + "=" + newCookie;
     arr.push(newCookie);
     console.log(arr);
 }
@@ -548,12 +559,12 @@ function deleteAllCookies() {
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
 }
-if(getCookie("mode") == null){
+if (getCookie("mode") == null) {
     document.cookie = 'mode = light';
 }
 console.log(document.cookie);
 mode = getCookie("mode");
-function switchMode(){
+function switchMode() {
     if (mode == "light") {
         mode = "dark";
         updateMode();
@@ -582,7 +593,7 @@ function getCookie(cname) {
     }
     return null;
 }
-function updateMode(){
+function updateMode() {
     if (mode == "light") {
 
         document.documentElement.style.setProperty('--bgc', '#363636d0');
@@ -598,4 +609,176 @@ function updateMode(){
 
     }
 }
-setTimeout(function(){ document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
+setTimeout(function () { document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
+tippy('[data-tippy-content]', {
+
+    arrow: true,
+    delay: [500, 0],
+    inertia: true,
+    placement: 'bottom',
+    theme: 'delta',
+    animation: 'rotate',
+    arrowType: 'roundArrow'
+});
+
+function hexToRGB(h) {
+    let r = 0, g = 0, b = 0;
+
+    // 3 digits
+    if (h.length == 4) {
+        r = "0x" + h[1] + h[1];
+        g = "0x" + h[2] + h[2];
+        b = "0x" + h[3] + h[3];
+
+        // 6 digits
+    } else if (h.length == 7) {
+        r = "0x" + h[1] + h[2];
+        g = "0x" + h[3] + h[4];
+        b = "0x" + h[5] + h[6];
+    }
+
+    return {
+        r: r,
+        g: g,
+        b: b,
+    };
+}
+function RGBToHex(r, g, b) {
+    r = r.toString(16);
+    g = g.toString(16);
+    b = b.toString(16);
+
+    if (r.length == 1)
+        r = "0" + r;
+    if (g.length == 1)
+        g = "0" + g;
+    if (b.length == 1)
+        b = "0" + b;
+
+    return "#" + r + g + b;
+}
+function createSmartPalette() {
+    var c1i = 'N';
+    var c2i = 'N';
+    var c3i = 'N';
+    var c4i = 'N';
+    var c5i = 'N';
+
+    var colorI1 = hexToRGB(document.getElementById("col1").value);
+    var colorI2 = hexToRGB(document.getElementById("col2").value);
+    var colorI3 = hexToRGB(document.getElementById("col3").value);
+    var colorI4 = hexToRGB(document.getElementById("col4").value);
+    var colorI5 = hexToRGB(document.getElementById("col5").value);
+    if (c1lock) { c1i = [colorI1.r, colorI1.g, colorI1.b] }
+    if (c2lock) { c2i = [colorI2.r, colorI2.g, colorI2.b] }
+    if (c3lock) { c3i = [colorI3.r, colorI3.g, colorI3.b] }
+    if (c4lock) { c4i = [colorI4.r, colorI4.g, colorI4.b] }
+    if (c5lock) { c5i = [colorI5.r, colorI5.g, colorI5.b] }
+    var url = "https://colormind.io/api/";
+    var data = {
+        model: "default",
+        input: [c1i, c2i, c3i, c4i, c5i]
+    }
+
+    var http = new XMLHttpRequest();
+
+    http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+            var palette = JSON.parse(http.responseText).result;
+
+            for (let i = 0; i < palette.length; i++) {
+                const element = palette[i];
+                document.getElementById("col" + (i + 1)).value = RGBToHex(element[0], element[1], element[2]);
+            }
+            swatchUpdate();
+        }
+    }
+
+    http.open("POST", url, true);
+    http.send(JSON.stringify(data));
+}
+function lockSwatch(swatchNum) {
+    var lockIcon1 = document.getElementById("lockIcon1");
+    var lockIcon2 = document.getElementById("lockIcon2");
+    var lockIcon3 = document.getElementById("lockIcon3");
+    var lockIcon4 = document.getElementById("lockIcon4");
+    var lockIcon5 = document.getElementById("lockIcon5");
+    if (swatchNum == 1) {
+        if (c1lock) {
+            c1lock = false;
+            console.log("col1 isnt locked");
+            lockIcon1.classList.replace( "fa-lock","fa-lock-open");
+
+        } else {
+            c1lock = true;
+            console.log("col1 is locked");
+            lockIcon1.classList.replace("fa-lock-open", "fa-lock");
+        }
+    } else if (swatchNum == 2) {
+        if (c2lock) {
+            c2lock = false;
+            console.log("col2 isnt locked");
+            lockIcon2.classList.replace( "fa-lock","fa-lock-open");
+        } else {
+            c2lock = true;
+            console.log("col2 is locked");
+            lockIcon2.classList.replace("fa-lock-open", "fa-lock");
+        }
+    } else if (swatchNum == 3) {
+        if (c3lock) {
+            c3lock = false;
+            console.log("col3 isnt locked");
+            lockIcon3.classList.replace( "fa-lock","fa-lock-open");
+        } else {
+            c3lock = true;
+            console.log("col3 is locked");
+            lockIcon3.classList.replace("fa-lock-open", "fa-lock");
+        }
+    } else if (swatchNum == 4) {
+        if (c4lock) {
+            c4lock = false;
+            console.log("col4 isnt locked");
+            lockIcon4.classList.replace( "fa-lock","fa-lock-open");
+        } else {
+            c4lock = true;
+            console.log("col4 is locked");
+            lockIcon4.classList.replace("fa-lock-open", "fa-lock");
+        }
+    } else if (swatchNum == 5) {
+        if (c5lock) {
+            c5lock = false;
+            console.log("col5 isnt locked");
+            lockIcon5.classList.replace( "fa-lock","fa-lock-open");
+        } else {
+            c5lock = true;
+            console.log("col5 is locked");
+            lockIcon5.classList.replace("fa-lock-open", "fa-lock");
+        }
+    }
+}
+var getContrast = function (hexcolor){
+
+	// If a leading # is provided, remove it
+	if (hexcolor.slice(0, 1) === '#') {
+		hexcolor = hexcolor.slice(1);
+	}
+
+	// If a three-character hexcode, make six-character
+	if (hexcolor.length === 3) {
+		hexcolor = hexcolor.split('').map(function (hex) {
+			return hex + hex;
+		}).join('');
+	}
+
+	// Convert to RGB value
+	var r = parseInt(hexcolor.substr(0,2),16);
+	var g = parseInt(hexcolor.substr(2,2),16);
+	var b = parseInt(hexcolor.substr(4,2),16);
+
+	// Get YIQ ratio
+	var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+
+	// Check contrast
+	return (yiq >= 128) ? 'black' : 'white';
+
+};
