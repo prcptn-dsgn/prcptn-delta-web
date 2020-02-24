@@ -674,7 +674,7 @@ function createSmartPalette() {
     if (c3lock) { c3i = [colorI3.r, colorI3.g, colorI3.b] }
     if (c4lock) { c4i = [colorI4.r, colorI4.g, colorI4.b] }
     if (c5lock) { c5i = [colorI5.r, colorI5.g, colorI5.b] }
-    var url = "http://colormind.io/api/";
+    var url = "//colormind.io/api/";
     var data = {
         model: "default",
         input: [c1i, c2i, c3i, c4i, c5i]
