@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Prcptn Delta</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="alrt.css">
+    <script src="alrt.js"></script>
     <script src="main.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0ee0232d59.js" crossorigin="anonymous"></script>
@@ -17,51 +19,71 @@
     <link href="https://fonts.googleapis.com/css?family=Courier+Prime:400,700&display=swap" rel="stylesheet">
 </head>
 
-<body onload="load()">
+<body onload="load()" id="owowo">
+
+
     <div class="main">
         <div class="colors">
             <div class="col-picker-wrapper hovfx swatch1" id="wrap1">
                 <div onchange="swatchUpdate()"><input type="color" name="asd" id="col1" value="#ffe3d7"
-                        onchange="getCols()"></div> <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(1)" id="lockIcon1" style="color:black" data-tippy-content="lock color (smart palette only)"></i></div>
+                        onchange="getCols()"></div>
+                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(1)" id="lockIcon1"
+                        style="color:black" data-tippy-content="lock color (smart palette only)"></i></div>
                 <input type="text" name="" id="tex1" onchange="hexUpdate(1)">
             </div>
             <div class="col-picker-wrapper hovfx swatch2" id="wrap2">
                 <div onchange="swatchUpdate()"><input type="color" name="asd" id="col2" value="#FF9F8C"
-                        onchange="getCols()"></div> <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(2)" id="lockIcon2" data-tippy-content="lock color (smart palette only)"></i></div>
+                        onchange="getCols()"></div>
+                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(2)" id="lockIcon2"
+                        data-tippy-content="lock color (smart palette only)"></i></div>
                 <input type="text" name="" id="tex2" onchange="hexUpdate(2)">
             </div>
             <div class="col-picker-wrapper hovfx swatch3" id="wrap3">
                 <div onchange="swatchUpdate()"><input type="color" name="asda" id="col3" value="#FF5C5C"
-                        onchange="setCols()"></div> <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(3)" id="lockIcon3" data-tippy-content="lock color (smart palette only)"></i></div>
+                        onchange="setCols()"></div>
+                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(3)" id="lockIcon3"
+                        data-tippy-content="lock color (smart palette only)"></i></div>
                 <input type="text" name="" id="tex3" onchange="hexUpdate(3)">
             </div>
             <div class="col-picker-wrapper hovfx swatch4" id="wrap4">
                 <div onchange="swatchUpdate()"><input type="color" name="asd" id="col4" value="#870E48"
-                        onchange="getCols()"></div> <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(4)" id="lockIcon4" data-tippy-content="lock color (smart palette only)"></i></div>
+                        onchange="getCols()"></div>
+                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(4)" id="lockIcon4"
+                        data-tippy-content="lock color (smart palette only)"></i></div>
                 <input type="text" name="" id="tex4" onchange="hexUpdate(4)">
             </div>
             <div class="col-picker-wrapper hovfx swatch5" id="wrap5">
                 <div onchange="swatchUpdate()"><input type="color" name="ad" id="col5" value="#4a1e49"
-                        onchange="getCols()"></div> <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(5)" id="lockIcon5" data-tippy-content="lock color (smart palette only)"></i></div>
+                        onchange="getCols()"></div>
+                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(5)" id="lockIcon5"
+                        data-tippy-content="lock color (smart palette only)"></i></div>
                 <input type="text" name="" id="tex5" onchange="hexUpdate(5)">
             </div>
         </div>
         <div class="settings">
-            <div class="icon"><i class="fas fa-lock-open" onclick="check()" id="lockIcon" data-tippy-content="lock palette"></i></div>
-            <div class="icon"><i class="fas fa-dice animated fast" onclick="rand()" id="randIcon" data-tippy-content="randomize palette"></i></div>
-            <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()" id="branIcon" data-tippy-content="create smart palette"></i></div>
-            <div class="icon"><i class="fas fa-link" onclick="copyUrl()" id="linkIcon" data-tippy-content="copy palette link"></i></div>
-            <div class="icon"><i class="fas fa-file-code" onclick="copyCss()" id="cssIcon" data-tippy-content="copy palette css"></i></div>
-            <div class="icon"><i class="fas fa-heart" onclick="favPalette()" id="starIcon" data-tippy-content="save palette"></i></div>
-            <div class="icon"><i class="fas fa-th-large" onclick="window.location.href = 'palettes.html'" data-tippy-content="view saved palettes"></i>
+            <div class="icon"><i class="fas fa-lock-open" onclick="check()" id="lockIcon"
+                    data-tippy-content="lock palette"></i></div>
+            <div class="icon"><i class="fas fa-dice animated fast" onclick="rand()" id="randIcon"
+                    data-tippy-content="randomize palette"></i></div>
+            <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()" id="branIcon"
+                    data-tippy-content="create smart palette"></i></div>
+            <div class="icon"><i class="fas fa-link" onclick="copyUrl()" id="linkIcon"
+                    data-tippy-content="copy palette link"></i></div>
+            <div class="icon"><i class="fas fa-file-code" onclick="copyCss()" id="cssIcon"
+                    data-tippy-content="copy palette css"></i></div>
+            <div class="icon"><i class="fas fa-heart" onclick="favPalette()" id="starIcon"
+                    data-tippy-content="save palette"></i></div>
+            <div class="icon"><i class="fas fa-th-large" onclick="window.location.href = 'palettes.html'"
+                    data-tippy-content="view saved palettes"></i>
             </div>
         </div>
     </div>
 
     
+
+
     <script src="https://unpkg.com/popper.js@1"></script>
     <script src="https://unpkg.com/tippy.js@5"></script>
-    <script src="changelog.js"></script>
     <script src="main.js"></script>
 </body>
 

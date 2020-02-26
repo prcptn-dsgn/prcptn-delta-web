@@ -5,8 +5,12 @@
     /*#808080, white*/
     --bg: white;
     /*white, #160f1d*/
+    --abg: white;
 }
-
+#input{
+    opacity: 0;
+    position: absolute;
+}
 body {
     font-family: 'Varela Round', sans-serif;
 

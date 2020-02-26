@@ -327,6 +327,7 @@ function hexToHSL(H) {
 }
 
 function rand() {
+    alrtMake('palette !p!randomized!ep! successfully');
 
     if (checked == false) {
         var colorI1 = document.getElementById("col1");
@@ -464,7 +465,7 @@ function load() {
         colorI5.value = "#" + hex.c5;
     }
     getCols();
-    updateMode(); clload();
+    updateMode();
 }
 function copyUrl() {
     var cI1 = document.getElementById("col1").value.substring(1, 7);
@@ -599,13 +600,13 @@ function updateMode() {
         document.documentElement.style.setProperty('--bgc', '#363636d0');
         document.documentElement.style.setProperty('--col', 'white');
         document.documentElement.style.setProperty('--bg', '#160f1d');
-        document.getElementById("sunIcon").classList.replace("fa-moon", "fa-sun");
-
+        document.documentElement.style.setProperty('--abg', 'white');
     } else if (mode == "dark") {
         document.documentElement.style.setProperty('--bgc', '#ebebebd0');
         document.documentElement.style.setProperty('--col', '#808080');
         document.documentElement.style.setProperty('--bg', 'white');
-        document.getElementById("sunIcon").classList.replace("fa-sun", "fa-moon");
+        
+        document.documentElement.style.setProperty('--abg', '#160f1d');
 
     }
 }

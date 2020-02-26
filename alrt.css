@@ -1,0 +1,26 @@
+.alrt-wrap{
+    
+    left:50%;
+    transform: translate(-50%, 81vh);
+    position: absolute;
+}
+.alrt-text{
+    position: relative;
+    background: var(--abg);
+    color: var(--bg);
+    padding: .7vw;
+    font-size: 1.2vw;
+    width: fit-content;
+    border-radius: .4vw;
+    opacity: 0%;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) transform, 0.2s ease-in-out opacity;
+    
+}
+.alrt-important, .a-i{
+    color:#c74fff;
+    text-shadow: 0 0 .5vw #c74fff77;
+}
+.alrt-position-in{
+    transform: translate(0, -1vh);
+    opacity: 100%;
+}
