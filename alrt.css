@@ -20,7 +20,12 @@
     color:#c74fff;
     text-shadow: 0 0 .5vw #c74fff77;
 }
+.alrt-warning, .a-w{
+    color:#ff4f6c;
+    text-shadow: 0 0 .5vw #ff4f6c77;
+}
 .alrt-position-in{
+    
     transform: translate(0, -1vh);
     opacity: 100%;
 }

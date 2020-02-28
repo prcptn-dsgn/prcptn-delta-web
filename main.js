@@ -473,7 +473,7 @@ function copyUrl() {
     var cI3 = document.getElementById("col3").value.substring(1, 7);
     var cI4 = document.getElementById("col4").value.substring(1, 7);
     var cI5 = document.getElementById("col5").value.substring(1, 7);
-    var text = "http://prcptn.us/delta/#" + cI1 + cI2 + cI3 + cI4 + cI5;
+    var text = "#" + cI1 + cI2 + cI3 + cI4 + cI5;
     copy(text);
 
     var linkIcon = document.getElementById("linkIcon");
@@ -484,6 +484,7 @@ function copyUrl() {
     setTimeout(function () {
         linkIcon.classList.remove("pos-down");
     }, 100);
+    alrtMake('!p!url!ep! copied successfully');
 }
 
 function copy(value) {
@@ -508,6 +509,7 @@ function copyCss() {
     setTimeout(function () {
         cssIcon.classList.remove("pos-down");
     }, 100);
+    alrtMake('!p!css!ep! copied successfully');
 }
 function get_cookies_array() {
 
@@ -549,6 +551,7 @@ function favPalette() {
     document.cookie = getRandomString() + "=" + newCookie;
     arr.push(newCookie);
     console.log(arr);
+    alrtMake('!p!palette!ep! favorited');
 }
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -659,6 +662,7 @@ function RGBToHex(r, g, b) {
     return "#" + r + g + b;
 }
 function createSmartPalette() {
+    alrtMake('!w!smart palette!ew! created successfully');
     var c1i = 'N';
     var c2i = 'N';
     var c3i = 'N';
