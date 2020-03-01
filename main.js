@@ -327,7 +327,6 @@ function hexToHSL(H) {
 }
 
 function rand() {
-    alrtMake('palette !p!randomized!ep! successfully');
 
     if (checked == false) {
         var colorI1 = document.getElementById("col1");
@@ -484,7 +483,8 @@ function copyUrl() {
     setTimeout(function () {
         linkIcon.classList.remove("pos-down");
     }, 100);
-    alrtMake('!p!url!ep! copied successfully');
+    
+    alert("url copied successfully!");
 }
 
 function copy(value) {
@@ -501,7 +501,7 @@ function copyCss() {
     var cI3 = document.getElementById("col3").value;
     var cI4 = document.getElementById("col4").value;
     var cI5 = document.getElementById("col5").value;
-    var text = "/* Usage: 'color: var(--1)' */ :root { --c1:" + cI1 + "; --c2:" + cI2 + "; --c3:" + cI3 + "; --c4:" + cI4 + "; --c5:" + cI5 + ";}";
+    var text = "/* Usage: 'color: var(--c1)' */ :root { --c1:" + cI1 + "; --c2:" + cI2 + "; --c3:" + cI3 + "; --c4:" + cI4 + "; --c5:" + cI5 + ";}";
     copy(text);
 
     var cssIcon = document.getElementById("cssIcon");
@@ -509,7 +509,7 @@ function copyCss() {
     setTimeout(function () {
         cssIcon.classList.remove("pos-down");
     }, 100);
-    alrtMake('!p!css!ep! copied successfully');
+    alert("css copied successfully!");
 }
 function get_cookies_array() {
 
@@ -551,7 +551,8 @@ function favPalette() {
     document.cookie = getRandomString() + "=" + newCookie;
     arr.push(newCookie);
     console.log(arr);
-    alrtMake('!p!palette!ep! favorited');
+    
+    alert("palette favorited");
 }
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
@@ -662,7 +663,6 @@ function RGBToHex(r, g, b) {
     return "#" + r + g + b;
 }
 function createSmartPalette() {
-    alrtMake('!w!smart palette!ew! created successfully');
     var c1i = 'N';
     var c2i = 'N';
     var c3i = 'N';

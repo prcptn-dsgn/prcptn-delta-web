@@ -13,7 +13,6 @@ function alrtMake(innerText) {
         console.log(a);
     }, 1);
     alrtDel(wrap);
-    swatchUpdate();
 }
 function alrtDel() {
     if (a.length != 0) {
