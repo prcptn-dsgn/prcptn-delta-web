@@ -7,13 +7,15 @@
     /*white, #160f1d*/
     --abg: white;
 }
-#input{
+
+#input {
     opacity: 0;
     position: absolute;
 }
+
 body {
     font-family: 'Varela Round', sans-serif;
-
+    overflow: hidden;
 }
 
 input[type="text"] {
@@ -24,10 +26,12 @@ input[type="text"] {
     box-shadow: inset 0 -.5vh rgb(111, 0, 255);
     transition: 0.4s box-shadow cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.clickable:hover{
+
+.clickable:hover {
     box-shadow: inset 0 -3vh rgb(111, 0, 255);
-    
+
 }
+
 .settingsS {
     width: fit-content;
     height: 16vw;
@@ -1240,4 +1244,77 @@ input[type="text"] {
         margin-top: 10vh;
         margin-bottom: 5vh;
     }
+}
+
+.extras-wrap {
+    margin: auto;
+    width: 40vw;
+    background-color: var(--abg);
+    transition: 0.4s opacity cubic-bezier(0.175, 0.885, 0.32, 1.275), 0.4s transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 1vw;
+    overflow: hidden;
+    opacity: 0%;
+    transform: translateY(-5%);
+}
+
+.extras-wrap-in {
+    animation: extras-height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 100%;
+    transform: translateY(0%);
+    margin-top: 2vh;
+    padding: 1vw;
+}
+
+@keyframes export-height-in {
+    0% {
+        height: 0vw
+    }
+
+    100% {
+        height: 25vh;
+    }
+}
+
+@keyframes export-height-out {
+    0% {
+        height: 25vh
+    }
+
+    100% {
+        height: 0vh;
+    }
+}
+
+.export-wrap {
+    height: 25vh;
+}
+
+.export-wrap-in {
+    animation: export-height-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.export-wrap-out {
+    animation: export-height-out 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.export-element {
+    color: #a3a3a3;
+    transition: 0.2s;
+    width: 10vw;
+    height: 10vh;
+    margin: 1vw;
+    display: inline-block;
+    text-align: center;
+}
+
+.export-element i {
+    font-size: 5vw;
+}
+
+.export-element h1 {
+    font-size: 3vw;
+}
+
+.export-element:hover {
+    color: #868686
 }

@@ -1,6 +1,7 @@
 var mode = "light";
 var checked = false;
 var faved = false;
+var exportO = false;
 var hDif = {
     c1: 0,
     c2: 0,
@@ -483,7 +484,7 @@ function copyUrl() {
     setTimeout(function () {
         linkIcon.classList.remove("pos-down");
     }, 100);
-    
+
     alert("url copied successfully!");
 }
 
@@ -551,7 +552,7 @@ function favPalette() {
     document.cookie = getRandomString() + "=" + newCookie;
     arr.push(newCookie);
     console.log(arr);
-    
+
     alert("palette favorited");
 }
 function deleteAllCookies() {
@@ -609,7 +610,7 @@ function updateMode() {
         document.documentElement.style.setProperty('--bgc', '#ebebebd0');
         document.documentElement.style.setProperty('--col', '#808080');
         document.documentElement.style.setProperty('--bg', 'white');
-        
+
         document.documentElement.style.setProperty('--abg', '#160f1d');
 
     }
@@ -712,7 +713,7 @@ function lockSwatch(swatchNum) {
         if (c1lock) {
             c1lock = false;
             console.log("col1 isnt locked");
-            lockIcon1.classList.replace( "fa-lock","fa-lock-open");
+            lockIcon1.classList.replace("fa-lock", "fa-lock-open");
 
         } else {
             c1lock = true;
@@ -723,7 +724,7 @@ function lockSwatch(swatchNum) {
         if (c2lock) {
             c2lock = false;
             console.log("col2 isnt locked");
-            lockIcon2.classList.replace( "fa-lock","fa-lock-open");
+            lockIcon2.classList.replace("fa-lock", "fa-lock-open");
         } else {
             c2lock = true;
             console.log("col2 is locked");
@@ -733,7 +734,7 @@ function lockSwatch(swatchNum) {
         if (c3lock) {
             c3lock = false;
             console.log("col3 isnt locked");
-            lockIcon3.classList.replace( "fa-lock","fa-lock-open");
+            lockIcon3.classList.replace("fa-lock", "fa-lock-open");
         } else {
             c3lock = true;
             console.log("col3 is locked");
@@ -743,7 +744,7 @@ function lockSwatch(swatchNum) {
         if (c4lock) {
             c4lock = false;
             console.log("col4 isnt locked");
-            lockIcon4.classList.replace( "fa-lock","fa-lock-open");
+            lockIcon4.classList.replace("fa-lock", "fa-lock-open");
         } else {
             c4lock = true;
             console.log("col4 is locked");
@@ -753,7 +754,7 @@ function lockSwatch(swatchNum) {
         if (c5lock) {
             c5lock = false;
             console.log("col5 isnt locked");
-            lockIcon5.classList.replace( "fa-lock","fa-lock-open");
+            lockIcon5.classList.replace("fa-lock", "fa-lock-open");
         } else {
             c5lock = true;
             console.log("col5 is locked");
@@ -761,29 +762,48 @@ function lockSwatch(swatchNum) {
         }
     }
 }
-var getContrast = function (hexcolor){
+var getContrast = function (hexcolor) {
 
-	// If a leading # is provided, remove it
-	if (hexcolor.slice(0, 1) === '#') {
-		hexcolor = hexcolor.slice(1);
-	}
+    // If a leading # is provided, remove it
+    if (hexcolor.slice(0, 1) === '#') {
+        hexcolor = hexcolor.slice(1);
+    }
 
-	// If a three-character hexcode, make six-character
-	if (hexcolor.length === 3) {
-		hexcolor = hexcolor.split('').map(function (hex) {
-			return hex + hex;
-		}).join('');
-	}
+    // If a three-character hexcode, make six-character
+    if (hexcolor.length === 3) {
+        hexcolor = hexcolor.split('').map(function (hex) {
+            return hex + hex;
+        }).join('');
+    }
 
-	// Convert to RGB value
-	var r = parseInt(hexcolor.substr(0,2),16);
-	var g = parseInt(hexcolor.substr(2,2),16);
-	var b = parseInt(hexcolor.substr(4,2),16);
+    // Convert to RGB value
+    var r = parseInt(hexcolor.substr(0, 2), 16);
+    var g = parseInt(hexcolor.substr(2, 2), 16);
+    var b = parseInt(hexcolor.substr(4, 2), 16);
 
-	// Get YIQ ratio
-	var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    // Get YIQ ratio
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 
-	// Check contrast
-	return (yiq >= 128) ? 'black' : 'white';
+    // Check contrast
+    return (yiq >= 128) ? 'black' : 'white';
 
 };
+function exportOpen() {
+
+    if (exportO == false) {
+        document.getElementById("extras-wrap").innerHTML = '<div class="export-wrap export-wrap-in" id="export-wrap">what the fuck am i supposed to be doing again?</div>';
+        document.getElementById("extras-wrap").classList.add("extras-wrap-in");
+        exportO = true;
+    }else{
+        exportClose();
+    }
+}
+function exportClose(){
+    document.getElementById("export-wrap").classList.remove("export-wrap-in");
+    document.getElementById("export-wrap").classList.add("export-wrap-out");
+    document.getElementById("extras-wrap").classList.remove("extras-wrap-in");
+    exportO = false;
+    setTimeout(() => {
+        document.getElementById("extras-wrap").innerHTML = '';
+    }, 400);
+}
