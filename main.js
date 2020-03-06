@@ -791,9 +791,11 @@ var getContrast = function (hexcolor) {
 function exportOpen() {
 
     if (exportO == false) {
-        document.getElementById("extras-wrap").innerHTML = '<div class="export-wrap export-wrap-in" id="export-wrap">what the fuck am i supposed to be doing again?</div>';
+        document.getElementById("extras-wrap").innerHTML = '<div class="export-wrap export-wrap-in" id="export-wrap"> <div class="export-element fadeIn-0s" onclick="exportFile(`hex`);"><i class="fas fa-hashtag"></i><h1>hex</h1> </div><div class="export-element fadeIn-01s" onclick="exportFile(`rgb`);"><i class="fas fa-tint"></i><h1>rgb</h1> </div><div class="export-element fadeIn-02s " onclick="exportFile(`css`);"><i class="fas fa-file-code"></i><h1>css</h1> </div><div class="export-element fadeIn-03s" onclick="exportFile(`png`);"><i class="fas fa-file-image"></i><h1>png</h1> </div></div>';
         document.getElementById("extras-wrap").classList.add("extras-wrap-in");
         exportO = true;
+        document.getElementById("exportIcon").classList.add("negPoint4vh");
+        document.getElementById("exportDownIcon").classList.add("downIcon-vis");
     }else{
         exportClose();
     }
@@ -802,8 +804,44 @@ function exportClose(){
     document.getElementById("export-wrap").classList.remove("export-wrap-in");
     document.getElementById("export-wrap").classList.add("export-wrap-out");
     document.getElementById("extras-wrap").classList.remove("extras-wrap-in");
+    document.getElementById("exportIcon").classList.remove("negPoint4vh");
+    document.getElementById("exportDownIcon").classList.remove("downIcon-vis");
     exportO = false;
     setTimeout(() => {
         document.getElementById("extras-wrap").innerHTML = '';
-    }, 400);
+    }, 350);
+}
+function exportFile(format){
+    var url = window.location.href;
+    var params = url.slice(url.indexOf('#') + '#'.length);
+    
+    console.log(params);
+    params = params.split('-');
+    console.log(params);
+
+    var colors = decodeURIComponent(params[0]).match(/.{1,6}/g);
+    var name = decodeURIComponent(params[2]);
+
+    if (name == "undefined")
+        name = 'Color Palette'
+
+    console.log('Format: ' + format);
+    console.log('Colors: ' + colors.join(' '));
+    console.log('Name: ' + name);
+
+    switch (format)
+    {
+        case 'txt':
+        case 'hex':
+        case 'rgb':
+            exporter.exportTextFile(colors, colors.join('-'));
+            break;
+        case 'css':
+        case 'scss':
+            exporter.exportStylesheet(format, colors, colors.join('-'));
+            break;
+        case 'png':
+        case 'jpeg':
+            exporter.exportImage(format, colors, colors.join('-'));
+    }
 }

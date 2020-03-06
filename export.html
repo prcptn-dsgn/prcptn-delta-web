@@ -38,15 +38,15 @@
         case 'txt':
         case 'hex':
         case 'rgb':
-            exporter.exportTextFile(colors, name);
+            exporter.exportTextFile(colors, colors.join('-'));
             break;
         case 'css':
         case 'scss':
-            exporter.exportStylesheet(format, colors, name);
+            exporter.exportStylesheet(format, colors, colors.join('-'));
             break;
         case 'png':
         case 'jpeg':
-            exporter.exportImage(format, colors, name);
+            exporter.exportImage(format, colors, colors.join('-'));
     }
 </script>
 

@@ -68,8 +68,8 @@
                                         data-tippy-content="randomize palette"></i></div>
                         <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()"
                                         id="branIcon" data-tippy-content="create smart palette"></i></div>
-                        <div class="icon"><i class="fas fa-file-download" onclick="exportOpen()" id="linkIcon"
-                                        data-tippy-content="export"></i></div>
+                        <div class="icon"><i class="fas fa-file-download" onclick="exportOpen()" id="exportIcon"
+                                        data-tippy-content="export"></i><i class="fas fa-sort-down downIcon" id="exportDownIcon" onclick="exportClose()"></i></div>
                         <div class="icon"><i class="fas fa-link" onclick="copyUrl()" id="linkIcon"
                                         data-tippy-content="copy url"></i></div>
                         <div class="icon"><i class="fas fa-heart" onclick="favPalette()" id="starIcon"
@@ -78,29 +78,16 @@
                                         data-tippy-content="view saved palettes"></i>
                         </div>
                 </div>
-                <div class="extras-wrap extras-wrap-in" id="extras-wrap">
-                        <div class="export-wrap export-wrap-in" id="export-wrap">
-                                <div class="export-element"><i class="fas fa-hashtag"></i><br>
-                                        <h1>hex</h1>
-                                </div>
-                                <div class="export-element"><i class="fas fa-tint"></i><br>
-                                        <h1>rgb</h1>
-                                </div>
-                                <br>
-                                <div class="export-element"><i class="fas fa-file-code"></i><br>
-                                        <h1>css</h1>
-                                </div>
-                                <div class="export-element"><i class="fas fa-file-image"></i><br>
-                                        <h1>png</h1>
-                                </div>
-                        </div>
+
+                <div class="extras-wrap" id="extras-wrap">
+
                 </div>
         </div>
 
 
 
-
         <script src="https://unpkg.com/popper.js@1"></script>
+        <script src="exporter.js"></script>
         <script src="https://unpkg.com/tippy.js@5"></script>
         <script src="main.js"></script>
 </body>
