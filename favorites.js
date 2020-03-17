@@ -41,29 +41,30 @@ function load() {
         const name = nam[i];
         if (code.length == 30) {
 
-            var h1 = code.substring(0, 6);
-            var h2 = code.substring(6, 12);
-            var h3 = code.substring(12, 18);
-            var h4 = code.substring(18, 24);
-            var h5 = code.substring(24, 30);
-            createDiv(h1, h2, h3, h4, h5, name);
+            var h1 = "#" + code.substring(0, 6);
+            var h2 = "#" + code.substring(6, 12);
+            var h3 = "#" + code.substring(12, 18);
+            var h4 = "#" + code.substring(18, 24);
+            var h5 = "#" + code.substring(24, 30);
+            var url = h1.substring(1, 7) + h2.substring(1, 7) + h3.substring(1, 7) + h4.substring(1, 7) + h5.substring(1, 7);
+            createDiv(h1, h2, h3, h4, h5, url, name);
             console.log(code);
         }
     }
     getScrollX()
-    
-updateMode();
+
+    updateMode();
 
 }
-function createDiv(h1, h2, h3, h4, h5, name) {
+function createDiv(h1, h2, h3, h4, h5, url, name) {
 
     document.getElementById("main").innerHTML =
-        '<div class="group"><i class="fas fa-times delete" onclick="deleteCookie(' + "'" + name + "'" + ')" style="color:' + getContrast(h5) +'"></i><a href="index.html#' + h1 + h2 + h3 + h4 + h5 + '"><div class="color" style="background: ' + "#" + h1 +
-        ';"></div><div class="color" style="background: ' + "#" + h2 +
-        ';"></div><div class="color" style="background: ' + "#" + h3 +
-        ';"></div><div class="color" style="background: ' + "#" + h4 +
-        ';"></div><div class="color" style="background: ' + "#" + h5 +
-        ';"></div></a></div>' +
+        `<div class="group"><i class="fas fa-times delete" onclick="deleteCookie(' ${name} ')" style="color:' + getContrast(h5) +'"></i><a href="/#${url}"><div class="color" style="background: ${h1}
+        ;"></div><div class="color" style="background: ${h2}
+        ;"></div><div class="color" style="background: ${h3}
+        ;"></div><div class="color" style="background: ${h4}
+        ;"></div><div class="color" style="background: ${h5}
+        ;"></div></a></div>` +
         document.getElementById("main").innerHTML;
 }
 
@@ -84,11 +85,11 @@ function deleteAllCookies() {
     refreshCookies();
     load();
 }
-if(getCookie("mode") == null){
+if (getCookie("mode") == null) {
     document.cookie = 'mode = light';
 }
 mode = getCookie("mode");
-function switchMode(){
+function switchMode() {
     if (mode == "light") {
         mode = "dark";
         updateMode();
@@ -116,63 +117,61 @@ function getCookie(cname) {
     }
     return null;
 }
-function updateMode(){
+function updateMode() {
     if (mode == "light") {
 
         document.documentElement.style.setProperty('--bgc', '#363636d0');
         document.documentElement.style.setProperty('--col', 'white');
         document.documentElement.style.setProperty('--bg', '#160f1d');
-        document.getElementById("sunIcon").classList.replace("fa-moon", "fa-sun");
 
     } else if (mode == "dark") {
         document.documentElement.style.setProperty('--bgc', '#ebebebd0');
         document.documentElement.style.setProperty('--col', '#808080');
         document.documentElement.style.setProperty('--bg', 'white');
-        document.getElementById("sunIcon").classList.replace("fa-sun", "fa-moon");
 
     }
 }
-function getScrollX(){
+function getScrollX() {
     var scroll = window.scrollY;
     var goalVH = scroll / window.innerHeight * 100 + 36;
     document.getElementById("settings").style.top = goalVH + "vh";
 }
-var getContrast = function (hexcolor){
+var getContrast = function (hexcolor) {
 
-	// If a leading # is provided, remove it
-	if (hexcolor.slice(0, 1) === '#') {
-		hexcolor = hexcolor.slice(1);
-	}
+    // If a leading # is provided, remove it
+    if (hexcolor.slice(0, 1) === '#') {
+        hexcolor = hexcolor.slice(1);
+    }
 
-	// If a three-character hexcode, make six-character
-	if (hexcolor.length === 3) {
-		hexcolor = hexcolor.split('').map(function (hex) {
-			return hex + hex;
-		}).join('');
-	}
+    // If a three-character hexcode, make six-character
+    if (hexcolor.length === 3) {
+        hexcolor = hexcolor.split('').map(function (hex) {
+            return hex + hex;
+        }).join('');
+    }
 
-	// Convert to RGB value
-	var r = parseInt(hexcolor.substr(0,2),16);
-	var g = parseInt(hexcolor.substr(2,2),16);
-	var b = parseInt(hexcolor.substr(4,2),16);
+    // Convert to RGB value
+    var r = parseInt(hexcolor.substr(0, 2), 16);
+    var g = parseInt(hexcolor.substr(2, 2), 16);
+    var b = parseInt(hexcolor.substr(4, 2), 16);
 
-	// Get YIQ ratio
-	var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    // Get YIQ ratio
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 
-	// Check contrast
-	return (yiq >= 128) ? 'black' : 'white';
+    // Check contrast
+    return (yiq >= 128) ? 'black' : 'white';
 
 };
-function refreshPalettes(){
+function refreshPalettes() {
     refreshCookies();
     load();
 }
-setTimeout(function(){ document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
+setTimeout(function () { document.body.style.transition = "background 0.4s, color 0.4s" }, 1000);
 console.log(document.cookie);
 
-tippy('[data-tippy-content]',{
-    
-    arrow:true,
+tippy('[data-tippy-content]', {
+
+    arrow: true,
     delay: [500, 0],
     inertia: true,
     placement: 'right',
