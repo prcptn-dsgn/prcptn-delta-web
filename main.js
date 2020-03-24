@@ -472,7 +472,7 @@ function copyUrl() {
     var cI3 = document.getElementById("col3").value.substring(1, 7);
     var cI4 = document.getElementById("col4").value.substring(1, 7);
     var cI5 = document.getElementById("col5").value.substring(1, 7);
-    var text = "#" + cI1 + cI2 + cI3 + cI4 + cI5;
+    var text = "https://delta.prcptn.us#" + cI1 + cI2 + cI3 + cI4 + cI5;
     copy(text);
 
     var linkIcon = document.getElementById("linkIcon");
