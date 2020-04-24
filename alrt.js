@@ -1,4 +1,4 @@
-var a = [];
+/*var a = [];
 function alrtMake(innerText) {
     var nid = getRandomString();
     var f = innerText.replace(/!p!/g, '<span class="a-i">').replace(/!ep!/g, '</span>').replace(/!w!/g, '<span class="a-w">').replace(/!ew!/g, '</span>');
@@ -46,7 +46,7 @@ function getRandomString() {
     return color;
 }
 
-/*
+
 <div class="alrt-wrap">
         <div class="alrt-text" id="E821E"><span class="alrt-important">this is important text.</span> this is normal text.</div>
     </div>

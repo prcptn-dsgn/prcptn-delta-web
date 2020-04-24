@@ -59,7 +59,7 @@ function load() {
 function createDiv(h1, h2, h3, h4, h5, url, name) {
 
     document.getElementById("main").innerHTML =
-        `<div class="group"><i class="fas fa-times delete" onclick="deleteCookie(' ${name} ')" style="color:' + getContrast(h5) +'"></i><a href="/#${url}"><div class="color" style="background: ${h1}
+        `<div class="group"><i class="fas fa-times delete" onclick="deleteCookie(' ${name} ')" style="color:${getContrast(h5)}"></i><a href="/#${url}"><div class="color" style="background: ${h1}
         ;"></div><div class="color" style="background: ${h2}
         ;"></div><div class="color" style="background: ${h3}
         ;"></div><div class="color" style="background: ${h4}
@@ -128,7 +128,7 @@ function updateMode() {
         document.documentElement.style.setProperty('--bgc', '#ebebebd0');
         document.documentElement.style.setProperty('--col', '#808080');
         document.documentElement.style.setProperty('--bg', 'white');
-
+        
     }
 }
 function getScrollX() {
@@ -138,7 +138,7 @@ function getScrollX() {
 }
 var getContrast = function (hexcolor) {
 
-    // If a leading # is provided, remove it
+    // If a leading # is provided, remove it ===
     if (hexcolor.slice(0, 1) === '#') {
         hexcolor = hexcolor.slice(1);
     }
