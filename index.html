@@ -8,15 +8,14 @@
         <title>Prcptn Delta</title>
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="alrt.css">
-        <script src="alrt.js"></script>
-        <script src="main.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/0ee0232d59.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="animate.css">
         <link rel="stylesheet" href="changelog.css">
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="https://unpkg.com/tippy.js@5/dist/backdrop.css" />
-        <link href="https://fonts.googleapis.com/css?family=Courier+Prime:400,700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="delta-01.png">
 </head>
 
 <body onload="load()" id="owowo">
@@ -24,55 +23,70 @@
 
         <div class="main">
                 <div class="colors">
-                        <div class="col-picker-wrapper hovfx swatch1" id="wrap1">
-                                <div onchange="swatchUpdate()"><input type="color" name="asd" id="col1" value="#ffe3d7"
-                                                onchange="getCols()"></div>
-                                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(1)" id="lockIcon1"
-                                                style="color:black"
-                                                data-tippy-content="lock color (smart palette only)"></i></div>
+                        <div class="col-picker-wrapper hovfx" id="col1">
+                                <div onclick="openTint(this)" id="swatch1" class="swatch" onchange="swatchUpdate()"
+                                        style="background-color:red;">
+                                        <div class="s-icon">
+                                                <i class="fas fa-lock-open" onclick="lockSwatch(1)" id="lockIcon1"
+                                                        style="color:black"
+                                                        data-tippy-content="lock color"></i>
+                                        </div>
+                                </div>
+
                                 <input type="text" name="" id="tex1" onchange="hexUpdate(1)">
                         </div>
-                        <div class="col-picker-wrapper hovfx swatch2" id="wrap2">
-                                <div onchange="swatchUpdate()"><input type="color" name="asd" id="col2" value="#FF9F8C"
-                                                onchange="getCols()"></div>
-                                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(2)" id="lockIcon2"
-                                                data-tippy-content="lock color (smart palette only)"></i></div>
+                        <div class="col-picker-wrapper hovfx" id="col2">
+                                <div onclick="openTint(this)" id="swatch2" class="swatch" onchange="swatchUpdate()">
+                                        <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(2)"
+                                                        id="lockIcon2"
+                                                        data-tippy-content="lock color"></i></div>
+                                </div>
+
                                 <input type="text" name="" id="tex2" onchange="hexUpdate(2)">
                         </div>
-                        <div class="col-picker-wrapper hovfx swatch3" id="wrap3">
-                                <div onchange="swatchUpdate()"><input type="color" name="asda" id="col3" value="#FF5C5C"
-                                                onchange="setCols()"></div>
-                                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(3)" id="lockIcon3"
-                                                data-tippy-content="lock color (smart palette only)"></i></div>
+                        <div class="col-picker-wrapper hovfx" id="col3">
+                                <div onclick="openTint(this)" id="swatch3" class="swatch" onchange="swatchUpdate()">
+                                        <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(3)"
+                                                        id="lockIcon3"
+                                                        data-tippy-content="lock color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex3" onchange="hexUpdate(3)">
                         </div>
-                        <div class="col-picker-wrapper hovfx swatch4" id="wrap4">
-                                <div onchange="swatchUpdate()"><input type="color" name="asd" id="col4" value="#870E48"
-                                                onchange="getCols()"></div>
-                                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(4)" id="lockIcon4"
-                                                data-tippy-content="lock color (smart palette only)"></i></div>
+                        <div class="col-picker-wrapper hovfx" id="col4">
+                                <div onclick="openTint(this)" id="swatch4" class="swatch" onchange="swatchUpdate()">
+                                        <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(4)"
+                                                        id="lockIcon4"
+                                                        data-tippy-content="lock color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex4" onchange="hexUpdate(4)">
                         </div>
-                        <div class="col-picker-wrapper hovfx swatch5" id="wrap5">
-                                <div onchange="swatchUpdate()"><input type="color" name="ad" id="col5" value="#4a1e49"
-                                                onchange="getCols()"></div>
-                                <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(5)" id="lockIcon5"
-                                                data-tippy-content="lock color (smart palette only)"></i></div>
+                        <div class="col-picker-wrapper hovfx" id="col5">
+                                <div onclick="openTint(this)" id="swatch5" class="swatch" onchange="swatchUpdate()">
+                                        <div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(5)"
+                                                        id="lockIcon5"
+                                                        data-tippy-content="lock color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex5" onchange="hexUpdate(5)">
                         </div>
                 </div>
-                <div class="settings">
-                        <div class="icon"><i class="fas fa-lock-open" onclick="check()" id="lockIcon"
-                                        data-tippy-content="lock palette"></i></div>
+                <div class="settings settings-hidden">
+                        <div id="openIcon" class="openIcon" onclick="sidebar()"><i class="fas fa-long-arrow-alt-left"id="openIcon"></i></div>
+                        <div class="icon"><i class="fas fa-sync-alt" onclick="check()" id="dynIcon"
+                                        data-tippy-content="turn on dynamic mode"></i></div>
                         <div class="icon"><i class="fas fa-dice animated fast" onclick="rand()" id="randIcon"
                                         data-tippy-content="randomize palette"></i></div>
                         <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()"
-                                        id="branIcon" data-tippy-content="create smart palette"></i></div>
-                        <div class="icon"><i class="fas fa-file-download" onclick="exportOpen()" id="exportIcon"
-                                        data-tippy-content="export"></i><i class="fas fa-sort-down downIcon" id="exportDownIcon" onclick="exportClose()"></i></div>
+                                        id="branIcon" data-tippy-content="create smart palette (experimental)"></i></div>
+                        <!---<div class="icon"><i class="fas fa-file-download" onclick="exportOpen()" id="exportIcon"
+                                        data-tippy-content="export"></i><i class="fas fa-sort-down downIcon"
+                                        id="exportDownIcon" onclick="exportClose()"></i></div>-->
                         <div class="icon"><i class="fas fa-link" onclick="copyUrl()" id="linkIcon"
                                         data-tippy-content="copy url"></i></div>
                         <div class="icon"><i class="fas fa-heart" onclick="favPalette()" id="starIcon"
+                                        data-tippy-content="save palette"></i></div>
+                        <div class="icon"><i class="fas fa-undo-alt" onclick="undoSwatch()" id="undoIcon"
+                                        data-tippy-content="save palette"></i></div>
+                        <div class="icon"><i class="fas fa-redo-alt" onclick="redoSwatch()" id="redoIcon"
                                         data-tippy-content="save palette"></i></div>
                         <div class="icon"><i class="fas fa-th-large" onclick="window.location.href = 'palettes.html'"
                                         data-tippy-content="view saved palettes"></i>
@@ -87,8 +101,12 @@
 
 
         <script src="https://unpkg.com/popper.js@1"></script>
-        <script src="exporter.js"></script>
         <script src="https://unpkg.com/tippy.js@5"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/enwash/tint@latest/dist/min.css" />
+        <script src="https://cdn.jsdelivr.net/gh/prcptn-dsgn/qwik@latest/dist/min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/enwash/tint@latest/dist/min.js"></script>
+        <script src="alrt.js"></script>
+        <script src="exporter.js"></script>
         <script src="main.js"></script>
 </body>
 

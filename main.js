@@ -2,280 +2,97 @@ var mode = "light";
 var checked = false;
 var faved = false;
 var exportO = false;
-var hDif = {
-    c1: 0,
-    c2: 0,
-    c4: 0,
-    c5: 0
-};
-
-var lDif = {
-    c1: 0,
-    c2: 0,
-    c4: 0,
-    c5: 0
-};
-
-var sDif = {
-    c1: 0,
-    c2: 0,
-    c4: 0,
-    c5: 0
-};
-var c1lock = false;
-var c2lock = false;
-var c3lock = false;
-var c4lock = false;
-var c5lock = false;
-function getCols() {
-    if (checked == false) {
-        var colorI1 = document.getElementById("col1");
-        var colorI2 = document.getElementById("col2");
-        var colorI3 = document.getElementById("col3");
-        var colorI4 = document.getElementById("col4");
-        var colorI5 = document.getElementById("col5");
-
-        var colorHSL1 = hexToHSL(colorI1.value);
-        var colorHSL2 = hexToHSL(colorI2.value);
-        var colorHSL3 = hexToHSL(colorI3.value);
-        var colorHSL4 = hexToHSL(colorI4.value);
-        var colorHSL5 = hexToHSL(colorI5.value);
-        var hueDiffs = {
-            c1: colorHSL1.h - colorHSL3.h,
-            c2: colorHSL2.h - colorHSL3.h,
-            c4: colorHSL4.h - colorHSL3.h,
-            c5: colorHSL5.h - colorHSL3.h
-        };
-        var satDiffs = {
-            c1: colorHSL1.s - colorHSL3.s,
-            c2: colorHSL2.s - colorHSL3.s,
-            c4: colorHSL4.s - colorHSL3.s,
-            c5: colorHSL5.s - colorHSL3.s
-        };
-        var lumDiffs = {
-            c1: colorHSL1.l - colorHSL3.l,
-            c2: colorHSL2.l - colorHSL3.l,
-            c4: colorHSL4.l - colorHSL3.l,
-            c5: colorHSL5.l - colorHSL3.l
-        };
-        hDif = hueDiffs;
-        sDif = satDiffs;
-        lDif = lumDiffs;
-        console.log(hueDiffs);
-        console.log(satDiffs);
-        console.log(lumDiffs);
-
-    }
-    swatchUpdate();
+var cLocked = {
+    col1: false,
+    col2: false,
+    col3: false,
+    col4: false,
+    col5: false,
 }
-
-function setCols() {
-    if (checked == true) {
-
-        var colorI1 = document.getElementById("col1");
-        var colorI2 = document.getElementById("col2");
-        var colorI3 = document.getElementById("col3");
-        var colorI4 = document.getElementById("col4");
-        var colorI5 = document.getElementById("col5");
-
-        var colorHSL1 = hexToHSL(colorI1.value);
-        var colorHSL2 = hexToHSL(colorI2.value);
-        var colorHSL3 = hexToHSL(colorI3.value);
-        var colorHSL4 = hexToHSL(colorI4.value);
-        var colorHSL5 = hexToHSL(colorI5.value);
-        var col1 = {
-            h: colorHSL3.h + hDif.c1,
-            s: colorHSL3.s + sDif.c1,
-            l: colorHSL3.l + lDif.c1
-        }
-        if (col1.h < 0) {
-            col1.h = 360 + col1.h;
-        } else if (col1.h > 360) {
-            col1.h = col1.h - 360;
-        } else if (col1.s < 0) {
-            col1.s = 0;
-        } else if (col1.s > 100) {
-            col1.s = 100;
-        } else if (col1.l < 0) {
-            col1.l = 0;
-        } else if (col1.l > 100) {
-            col1.l = 100;
-        }
-        col1new = HSLToHex(col1.h, col1.s, col1.l);
-        colorI1.value = col1new;
-
-        console.log(col1);
-
-        var col2 = {
-            h: colorHSL3.h + hDif.c2,
-            s: colorHSL3.s + sDif.c2,
-            l: colorHSL3.l + lDif.c2
-        }
-        if (col2.h < 0) {
-            col2.h = 360 + col2.h;
-        } else if (col2.h > 360) {
-            col2.h = col2.h - 360;
-        } else if (col2.s < 0) {
-            col2.s = 0;
-        } else if (col2.s > 100) {
-            col2.s = 100;
-        } else if (col2.l < 0) {
-            col2.l = 0;
-        } else if (col2.l > 100) {
-            col2.l = 100;
-        }
-        col2new = HSLToHex(col2.h, col2.s, col2.l);
-        colorI2.value = col2new;
-
-        console.log(col2);
-
-        var col4 = {
-            h: colorHSL3.h + hDif.c4,
-            s: colorHSL3.s + sDif.c4,
-            l: colorHSL3.l + lDif.c4
-        }
-        if (col4.h < 0) {
-            col4.h = 360 + col4.h;
-        } else if (col4.h > 360) {
-            col4.h = col4.h - 360;
-        } else if (col4.s < 0) {
-            col4.s = 0;
-        } else if (col4.s > 100) {
-            col4.s = 100;
-        } else if (col4.l < 0) {
-            col4.l = 0;
-        } else if (col4.l > 100) {
-            col4.l = 100;
-        }
-        col4new = HSLToHex(col4.h, col4.s, col4.l);
-        colorI4.value = col4new;
-
-        console.log(col4);
-
-        var col5 = {
-            h: colorHSL3.h + hDif.c5,
-            s: colorHSL3.s + sDif.c5,
-            l: colorHSL3.l + lDif.c5
-        }
-        if (col5.h < 0) {
-            col5.h = 360 + col5.h;
-        } else if (col5.h > 360) {
-            col5.h = col5.h - 360;
-        } else if (col5.s < 0) {
-            col5.s = 0;
-        } else if (col5.s > 100) {
-            col5.s = 100;
-        } else if (col5.l < 0) {
-            col5.l = 0;
-        } else if (col5.l > 100) {
-            col5.l = 100;
-        }
-        col5new = HSLToHex(col5.h, col5.s, col5.l);
-        colorI5.value = col5new;
-
-        console.log(col5);
-
-    } else {
-        getCols();
+var cols = {
+    col1: "#ffe3d7",
+    col2: "#FF9F8C",
+    col3: "#FF5C5C",
+    col4: "#870E48",
+    col5: "#4a1e49",
+}
+var colorI1;
+var colorI2;
+var colorI3;
+var colorI4;
+var colorI5;
+var w1;
+var w2;
+var w3;
+var w4;
+var w5;
+function load() {
+    var hex = getID(window.location.href);
+    if (hex != null) {
+        cols.col1 = "#" + hex.c1;
+        cols.col2 = "#" + hex.c2;
+        cols.col3 = "#" + hex.c3;
+        cols.col4 = "#" + hex.c4;
+        cols.col5 = "#" + hex.c5;
     }
+    updateSwatches();
+    updateMode();
+}
+function updateSwatches() {
+    q.get("#col1").childNodes[1].style.background = cols.col1;
+    q.get("#col2").childNodes[1].style.background = cols.col2;
+    q.get("#col3").childNodes[1].style.background = cols.col3;
+    q.get("#col4").childNodes[1].style.background = cols.col4;
+    q.get("#col5").childNodes[1].style.background = cols.col5;
+    q.get("#tex1").value = cols.col1;
+    q.get("#tex2").value = cols.col2;
+    q.get("#tex3").value = cols.col3;
+    q.get("#tex4").value = cols.col4;
+    q.get("#tex5").value = cols.col5;
+    q.get("#lockIcon1").style.color = getContrast(cols.col1);
+    q.get("#lockIcon2").style.color = getContrast(cols.col2);
+    q.get("#lockIcon3").style.color = getContrast(cols.col3);
+    q.get("#lockIcon4").style.color = getContrast(cols.col4);
+    q.get("#lockIcon5").style.color = getContrast(cols.col5);
+    addUndo()
+    resetRedo()
+    updateRUColors()
+}
+function updateWOundo() {
+    q.get("#col1").childNodes[1].style.background = cols.col1;
+    q.get("#col2").childNodes[1].style.background = cols.col2;
+    q.get("#col3").childNodes[1].style.background = cols.col3;
+    q.get("#col4").childNodes[1].style.background = cols.col4;
+    q.get("#col5").childNodes[1].style.background = cols.col5;
+    q.get("#tex1").value = cols.col1;
+    q.get("#tex2").value = cols.col2;
+    q.get("#tex3").value = cols.col3;
+    q.get("#tex4").value = cols.col4;
+    q.get("#tex5").value = cols.col5;
+    q.get("#lockIcon1").style.color = getContrast(cols.col1);
+    q.get("#lockIcon2").style.color = getContrast(cols.col2);
+    q.get("#lockIcon3").style.color = getContrast(cols.col3);
+    q.get("#lockIcon4").style.color = getContrast(cols.col4);
+    q.get("#lockIcon5").style.color = getContrast(cols.col5);
+    updateRUColors()
 }
 
 function check() {
-    var cI1 = document.getElementById("col1");
-    var cI2 = document.getElementById("col2");
-    var cI4 = document.getElementById("col4");
-    var cI5 = document.getElementById("col5");
 
-    var wI1 = document.getElementById("wrap1");
-    var wI2 = document.getElementById("wrap2");
-    var wI4 = document.getElementById("wrap4");
-    var wI5 = document.getElementById("wrap5");
 
-    var lockIcon = document.getElementById("lockIcon");
-
-    var tI1 = document.getElementById("tex1");
-    var tI2 = document.getElementById("tex2");
-    var tI4 = document.getElementById("tex4");
-    var tI5 = document.getElementById("tex5");
+    var dynIcon = q.get("#dynIcon");
 
     if (checked == false) {
-        lockIcon.classList.replace("fa-lock-open", "fa-lock");
-        lockIcon.classList.add("pos-down");
+        dynIcon.style.color = "#0abeff";
         checked = true;
-        console.log("checled owow");
-        cI1.disabled = true;
-        cI2.disabled = true;
-        cI4.disabled = true;
-        cI5.disabled = true;
-        tI1.disabled = true;
-        tI2.disabled = true;
-        tI4.disabled = true;
-        tI5.disabled = true;
-
-        wI1.classList.remove("hovfx");
-        wI2.classList.remove("hovfx");
-        wI4.classList.remove("hovfx");
-        wI5.classList.remove("hovfx");
-        setTimeout(function () {
-            lockIcon.classList.remove("pos-down");
-        }, 100);
     } else {
-        lockIcon.classList.replace("fa-lock", "fa-lock-open");
-        lockIcon.classList.add("pos-down");
+        dynIcon.style.color = "var(--col)";
         checked = false;
-        console.log("unchecled owow");
-        cI1.disabled = false;
-        cI2.disabled = false;
-        cI4.disabled = false;
-        cI5.disabled = false;
-        tI1.disabled = false;
-        tI2.disabled = false;
-        tI4.disabled = false;
-        tI5.disabled = false;
-
-        wI1.classList.add("hovfx");
-        wI2.classList.add("hovfx");
-        wI4.classList.add("hovfx");
-        wI5.classList.add("hovfx");
-        setTimeout(function () {
-            lockIcon.classList.remove("pos-down");
-        }, 100);
     }
 
 
 }
 
-
-function swatchUpdate() {
-    var colorI1 = document.getElementById("col1");
-    var colorI2 = document.getElementById("col2");
-    var colorI3 = document.getElementById("col3");
-    var colorI4 = document.getElementById("col4");
-    var colorI5 = document.getElementById("col5");
-
-    var wrap1 = document.getElementById("wrap1");
-    var wrap2 = document.getElementById("wrap2");
-    var wrap3 = document.getElementById("wrap3");
-    var wrap4 = document.getElementById("wrap4");
-    var wrap5 = document.getElementById("wrap5");
-
-    document.getElementById("tex1").value = colorI1.value;
-    document.getElementById("tex2").value = colorI2.value;
-    document.getElementById("tex3").value = colorI3.value;
-    document.getElementById("tex4").value = colorI4.value;
-    document.getElementById("tex5").value = colorI5.value;
-    wrap1.style.backgroundColor = colorI1.value;
-    wrap2.style.backgroundColor = colorI2.value;
-    wrap3.style.backgroundColor = colorI3.value;
-    wrap4.style.backgroundColor = colorI4.value;
-    wrap5.style.backgroundColor = colorI5.value;
-
-    document.getElementById("lockIcon1").style.color = getContrast(colorI1.value);
-    document.getElementById("lockIcon2").style.color = getContrast(colorI2.value);
-    document.getElementById("lockIcon3").style.color = getContrast(colorI3.value);
-    document.getElementById("lockIcon4").style.color = getContrast(colorI4.value);
-    document.getElementById("lockIcon5").style.color = getContrast(colorI5.value);
-}
 
 function hexToHSL(H) {
     // Convert hex to RGB first
@@ -330,36 +147,21 @@ function hexToHSL(H) {
 function rand() {
 
     if (checked == false) {
-        var colorI1 = document.getElementById("col1");
-        var colorI2 = document.getElementById("col2");
-        var colorI3 = document.getElementById("col3");
-        var colorI4 = document.getElementById("col4");
-        var colorI5 = document.getElementById("col5");
 
-        colorI1.value = getRandomColor();
-        colorI2.value = getRandomColor();
-        colorI3.value = getRandomColor();
-        colorI4.value = getRandomColor();
-        colorI5.value = getRandomColor();
+        if (cLocked.col1 == false) cols.col1 = getRandomColor();
+        if (cLocked.col2 == false) cols.col2 = getRandomColor();
+        if (cLocked.col3 == false) cols.col3 = getRandomColor();
+        if (cLocked.col4 == false) cols.col4 = getRandomColor();
+        if (cLocked.col5 == false) cols.col5 = getRandomColor();
 
-        getCols();
-        randIcon.classList.add("pos-down");
-        setTimeout(function () {
-            randIcon.classList.remove("pos-down");
-        }, 100);
+        updateSwatches()
     } else {
-        var colorI3 = document.getElementById("col3");
-        colorI3.value = getRandomColor();
-
-        setCols();
-        swatchUpdate();
-        randIcon.classList.add("pos-down");
-        setTimeout(function () {
-            randIcon.classList.remove("pos-down");
-        }, 100);
+        setColors([getRandomInt(360) + 1, getRandomInt(100) + 1, getRandomInt(100) + 1], `col${getRandomInt(5) + 1}`)
     }
 }
-
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
 function HSLToHex(h, s, l) {
     s /= 100;
     l /= 100;
@@ -417,23 +219,17 @@ function getRandomString() {
 }
 
 function hexUpdate(n) {
-    var tex = document.getElementById("tex" + n).value;
-    var colorI = document.getElementById("col" + n);
-    if (tex.length == 6) {
-        tex = "#" + tex;
-        colorI.value = tex;
-        getCols();
-    } else if (tex.length == 7) {
-        colorI.value = tex;
-        getCols();
+    var tex = q.get(`#tex${n}`).value;
+    if (tex.startsWith("#") == false) tex = "#" + tex;
+    if (/^#([0-9A-F]{3}){1,2}$/i.test(tex)) {
+        cols[`col${n}`] = tex
     }
-
+    updateSwatches();
 }
 
 // function you can use:
 function getID(str) {
     var string = str.split('#')[1];
-    console.log(string);
     if (string != undefined) {
         return {
             c1: string.substring(0, 6),
@@ -449,31 +245,13 @@ function getID(str) {
 // use the function:
 
 
-function load() {
-    var hex = getID(window.location.href);
-    console.log(hex);
-    var colorI1 = document.getElementById("col1");
-    var colorI2 = document.getElementById("col2");
-    var colorI3 = document.getElementById("col3");
-    var colorI4 = document.getElementById("col4");
-    var colorI5 = document.getElementById("col5");
-    if (hex != null) {
-        colorI1.value = "#" + hex.c1;
-        colorI2.value = "#" + hex.c2;
-        colorI3.value = "#" + hex.c3;
-        colorI4.value = "#" + hex.c4;
-        colorI5.value = "#" + hex.c5;
-    }
-    getCols();
-    updateMode();
-}
 function copyUrl() {
-    var cI1 = document.getElementById("col1").value.substring(1, 7);
-    var cI2 = document.getElementById("col2").value.substring(1, 7);
-    var cI3 = document.getElementById("col3").value.substring(1, 7);
-    var cI4 = document.getElementById("col4").value.substring(1, 7);
-    var cI5 = document.getElementById("col5").value.substring(1, 7);
-    var text = "#" + cI1 + cI2 + cI3 + cI4 + cI5;
+    var cI1 = cols.col1.substring(1, 7);
+    var cI2 = cols.col2.substring(1, 7);
+    var cI3 = cols.col3.substring(1, 7);
+    var cI4 = cols.col4.substring(1, 7);
+    var cI5 = cols.col5.substring(1, 7);
+    var text = `${window.location.protocol}//${window.location.hostname}/#` + cI1 + cI2 + cI3 + cI4 + cI5;
     copy(text);
 
     var linkIcon = document.getElementById("linkIcon");
@@ -496,12 +274,49 @@ function copy(value) {
     document.execCommand("copy");
     document.body.removeChild(input_temp);
 };
+function createSmartPalette() {
+    var url = "http://colormind.io/api/";
+    var c1 = hexToRgb(cols.col1);
+    var c2 = hexToRgb(cols.col2);
+    var c3 = hexToRgb(cols.col3);
+    var c4 = hexToRgb(cols.col4);
+    var c5 = hexToRgb(cols.col5);
+    var input = [];
+    if(cLocked.col1)input.push([c1.r,c1.g,c1.b]); else input.push("N")
+    if(cLocked.col2)input.push([c2.r,c2.g,c2.b]); else input.push("N")
+    if(cLocked.col3)input.push([c3.r,c3.g,c3.b]); else input.push("N")
+    if(cLocked.col4)input.push([c4.r,c4.g,c4.b]); else input.push("N")
+    if(cLocked.col5)input.push([c5.r,c5.g,c5.b]); else input.push("N")
+    var data = {
+        model: "default"
+    }
+    data.input = input;
+
+    var http = new XMLHttpRequest();
+    var palette;
+    http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+            palette = JSON.parse(http.responseText).result;
+            cols = {
+                col1:RGBToHex(palette[0][0],palette[0][1],palette[0][2]),
+                col2:RGBToHex(palette[1][0],palette[1][1],palette[1][2]),
+                col3:RGBToHex(palette[2][0],palette[2][1],palette[2][2]),
+                col4:RGBToHex(palette[3][0],palette[3][1],palette[3][2]),
+                col5:RGBToHex(palette[4][0],palette[4][1],palette[4][2]),
+            }
+            updateSwatches()
+        }
+    }
+    http.open("POST", url, true);
+    http.send(JSON.stringify(data));
+}
+
 function copyCss() {
-    var cI1 = document.getElementById("col1").value;
-    var cI2 = document.getElementById("col2").value;
-    var cI3 = document.getElementById("col3").value;
-    var cI4 = document.getElementById("col4").value;
-    var cI5 = document.getElementById("col5").value;
+    var cI1 = cols.col1;
+    var cI2 = cols.col2;
+    var cI3 = cols.col3;
+    var cI4 = cols.col4;
+    var cI5 = cols.col5;
     var text = "/* Usage: 'color: var(--c1)' */ :root { --c1:" + cI1 + "; --c2:" + cI2 + "; --c3:" + cI3 + "; --c4:" + cI4 + "; --c5:" + cI5 + ";}";
     copy(text);
 
@@ -538,20 +353,18 @@ function refreshCookies() {
     }
     arr.shift();
     arr.pop();
-    console.log(arr);
 }
 refreshCookies();
 
 function favPalette() {
-    var cI1 = document.getElementById("col1").value.substring(1, 7);
-    var cI2 = document.getElementById("col2").value.substring(1, 7);
-    var cI3 = document.getElementById("col3").value.substring(1, 7);
-    var cI4 = document.getElementById("col4").value.substring(1, 7);
-    var cI5 = document.getElementById("col5").value.substring(1, 7);
+    var cI1 = cols.col1.substring(1, 7);
+    var cI2 = cols.col2.substring(1, 7);
+    var cI3 = cols.col3.substring(1, 7);
+    var cI4 = cols.col4.substring(1, 7);
+    var cI5 = cols.col5.substring(1, 7);
     var newCookie = cI1 + cI2 + cI3 + cI4 + cI5;
     document.cookie = getRandomString() + "=" + newCookie;
     arr.push(newCookie);
-    console.log(arr);
 
     alert("palette favorited");
 }
@@ -568,7 +381,6 @@ function deleteAllCookies() {
 if (getCookie("mode") == null) {
     document.cookie = 'mode = light';
 }
-console.log(document.cookie);
 mode = getCookie("mode");
 function switchMode() {
     if (mode == "light") {
@@ -582,7 +394,6 @@ function switchMode() {
         document.cookie = 'mode = light';
 
     }
-    console.log(document.cookie);
 }
 function getCookie(cname) {
     var name = cname + "=";
@@ -627,28 +438,14 @@ tippy('[data-tippy-content]', {
     arrowType: 'roundArrow'
 });
 
-function hexToRGB(h) {
-    let r = 0, g = 0, b = 0;
-
-    // 3 digits
-    if (h.length == 4) {
-        r = "0x" + h[1] + h[1];
-        g = "0x" + h[2] + h[2];
-        b = "0x" + h[3] + h[3];
-
-        // 6 digits
-    } else if (h.length == 7) {
-        r = "0x" + h[1] + h[2];
-        g = "0x" + h[3] + h[4];
-        b = "0x" + h[5] + h[6];
-    }
-
-    return {
-        r: r,
-        g: g,
-        b: b,
-    };
-}
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 function RGBToHex(r, g, b) {
     r = r.toString(16);
     g = g.toString(16);
@@ -663,106 +460,21 @@ function RGBToHex(r, g, b) {
 
     return "#" + r + g + b;
 }
-function createSmartPalette() {
-    var c1i = 'N';
-    var c2i = 'N';
-    var c3i = 'N';
-    var c4i = 'N';
-    var c5i = 'N';
 
-    var colorI1 = hexToRGB(document.getElementById("col1").value);
-    var colorI2 = hexToRGB(document.getElementById("col2").value);
-    var colorI3 = hexToRGB(document.getElementById("col3").value);
-    var colorI4 = hexToRGB(document.getElementById("col4").value);
-    var colorI5 = hexToRGB(document.getElementById("col5").value);
-    if (c1lock) { c1i = [colorI1.r, colorI1.g, colorI1.b] }
-    if (c2lock) { c2i = [colorI2.r, colorI2.g, colorI2.b] }
-    if (c3lock) { c3i = [colorI3.r, colorI3.g, colorI3.b] }
-    if (c4lock) { c4i = [colorI4.r, colorI4.g, colorI4.b] }
-    if (c5lock) { c5i = [colorI5.r, colorI5.g, colorI5.b] }
-    var url = "//colormind.io/api/";
-    var data = {
-        model: "default",
-        input: [c1i, c2i, c3i, c4i, c5i]
-    }
-
-    var http = new XMLHttpRequest();
-
-    http.onreadystatechange = function () {
-        if (http.readyState == 4 && http.status == 200) {
-            var palette = JSON.parse(http.responseText).result;
-
-            for (let i = 0; i < palette.length; i++) {
-                const element = palette[i];
-                document.getElementById("col" + (i + 1)).value = RGBToHex(element[0], element[1], element[2]);
-            }
-            swatchUpdate();
-        }
-    }
-
-    http.open("POST", url, true);
-    http.send(JSON.stringify(data));
-}
 function lockSwatch(swatchNum) {
-    var lockIcon1 = document.getElementById("lockIcon1");
-    var lockIcon2 = document.getElementById("lockIcon2");
-    var lockIcon3 = document.getElementById("lockIcon3");
-    var lockIcon4 = document.getElementById("lockIcon4");
-    var lockIcon5 = document.getElementById("lockIcon5");
-    if (swatchNum == 1) {
-        if (c1lock) {
-            c1lock = false;
-            console.log("col1 isnt locked");
-            lockIcon1.classList.replace("fa-lock", "fa-lock-open");
-
-        } else {
-            c1lock = true;
-            console.log("col1 is locked");
-            lockIcon1.classList.replace("fa-lock-open", "fa-lock");
-        }
-    } else if (swatchNum == 2) {
-        if (c2lock) {
-            c2lock = false;
-            console.log("col2 isnt locked");
-            lockIcon2.classList.replace("fa-lock", "fa-lock-open");
-        } else {
-            c2lock = true;
-            console.log("col2 is locked");
-            lockIcon2.classList.replace("fa-lock-open", "fa-lock");
-        }
-    } else if (swatchNum == 3) {
-        if (c3lock) {
-            c3lock = false;
-            console.log("col3 isnt locked");
-            lockIcon3.classList.replace("fa-lock", "fa-lock-open");
-        } else {
-            c3lock = true;
-            console.log("col3 is locked");
-            lockIcon3.classList.replace("fa-lock-open", "fa-lock");
-        }
-    } else if (swatchNum == 4) {
-        if (c4lock) {
-            c4lock = false;
-            console.log("col4 isnt locked");
-            lockIcon4.classList.replace("fa-lock", "fa-lock-open");
-        } else {
-            c4lock = true;
-            console.log("col4 is locked");
-            lockIcon4.classList.replace("fa-lock-open", "fa-lock");
-        }
-    } else if (swatchNum == 5) {
-        if (c5lock) {
-            c5lock = false;
-            console.log("col5 isnt locked");
-            lockIcon5.classList.replace("fa-lock", "fa-lock-open");
-        } else {
-            c5lock = true;
-            console.log("col5 is locked");
-            lockIcon5.classList.replace("fa-lock-open", "fa-lock");
-        }
+    var lockIcon = q.get(`#lockIcon${swatchNum}`);
+    var text = q.get(`#tex${swatchNum}`);
+    if (cLocked[`col${swatchNum}`]) {
+        cLocked[`col${swatchNum}`] = false;
+        lockIcon.classList.replace("fa-lock", "fa-lock-open");
+        text.disabled = false
+    } else {
+        cLocked[`col${swatchNum}`] = true;
+        lockIcon.classList.replace("fa-lock-open", "fa-lock");
+        text.disabled = true
     }
 }
-var getContrast = function (hexcolor) {
+function getContrast(hexcolor) {
 
     // If a leading # is provided, remove it
     if (hexcolor.slice(0, 1) === '#') {
@@ -796,11 +508,11 @@ function exportOpen() {
         exportO = true;
         document.getElementById("exportIcon").classList.add("negPoint4vh");
         document.getElementById("exportDownIcon").classList.add("downIcon-vis");
-    }else{
+    } else {
         exportClose();
     }
 }
-function exportClose(){
+function exportClose() {
     document.getElementById("export-wrap").classList.remove("export-wrap-in");
     document.getElementById("export-wrap").classList.add("export-wrap-out");
     document.getElementById("extras-wrap").classList.remove("extras-wrap-in");
@@ -811,10 +523,10 @@ function exportClose(){
         document.getElementById("extras-wrap").innerHTML = '';
     }, 350);
 }
-function exportFile(format){
+function exportFile(format) {
     var url = window.location.href;
     var params = url.slice(url.indexOf('#') + '#'.length);
-    
+
     console.log(params);
     params = params.split('-');
     console.log(params);
@@ -829,8 +541,7 @@ function exportFile(format){
     console.log('Colors: ' + colors.join(' '));
     console.log('Name: ' + name);
 
-    switch (format)
-    {
+    switch (format) {
         case 'txt':
         case 'hex':
         case 'rgb':
@@ -844,4 +555,127 @@ function exportFile(format){
         case 'jpeg':
             exporter.exportImage(format, colors, colors.join('-'));
     }
+}
+function openTint(e) {
+    var id = e.parentElement.id;
+    var hsl = hexToHSL(cols[id])
+    var locked = cLocked[id]
+    if (locked == false) {
+        tint.open(`hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`);
+    } else {
+        id = ""
+    }
+    window.addEventListener('tintdone', e => {
+        color = tint.get().replace("hsl(", "").replace(")", "").replace(/%/g, "").split(",");
+        setColors(color, id)
+        tint.close()
+        id = ""
+    });
+}
+function setColors(h, e) {
+    if (checked) {
+        var oldHsl = hexToHSL(cols[e]);
+        var diff = {
+            h: `${h[0] - oldHsl.h}`,
+            s: `${h[1] - oldHsl.s}`,
+            l: `${h[2] - oldHsl.l}`,
+        }
+
+        for (let i = 0; i < Object.keys(cols).length; i++) {
+            var hsl = hexToHSL(cols[`col${i + 1}`])
+            var newH = parseInt(hsl.h, 10) + parseInt(diff.h, 10);
+            var newS = parseInt(hsl.s, 10) + parseInt(diff.s, 10);
+            var newL = parseInt(hsl.l, 10) + parseInt(diff.l, 10);
+            if (newH > 360) newH -= 360;
+            if (newH < 0) newH += 360;
+            if (newS > 100) newS = 100;
+            if (newS < 0) newS = 0;
+            if (newL > 100) newL = 100;
+            if (newL < 0) newL = 0;
+
+            if (cLocked[`col${i + 1}`] == false) {
+                cols[`col${i + 1}`] = HSLToHex(newH, newS, newL)
+            }
+        }
+    } else {
+        var hex = HSLToHex(h[0], h[1], h[2])
+        cols[e] = hex;
+    }
+    updateSwatches()
+}
+var undo = []
+var cur = "6";
+var redo = []
+
+function undoSwatch() {
+    if (undo.length > 0) {
+        redo.push(pack(cols))
+
+        undo.pop()
+        cols = {
+            col1: undo[undo.length - 1][0],
+            col2: undo[undo.length - 1][1],
+            col3: undo[undo.length - 1][2],
+            col4: undo[undo.length - 1][3],
+            col5: undo[undo.length - 1][4],
+        }
+    }
+    updateWOundo()
+    updateRUColors()
+}
+function redoSwatch() {
+    if (redo.length > 0) {
+        undo.push(cols)
+        cols = {
+            col1: redo[redo.length - 1][0],
+            col2: redo[redo.length - 1][1],
+            col3: redo[redo.length - 1][2],
+            col4: redo[redo.length - 1][3],
+            col5: redo[redo.length - 1][4],
+        }
+        redo.pop()
+    }
+    updateWOundo()
+    updateRUColors()
+}
+function addUndo() {
+    undo.push(pack(cols))
+    updateRUColors()
+}
+function resetRedo() {
+    redo = []
+    updateRUColors()
+}
+var pack = function (arr) {
+    var length = Object.keys(arr).length,
+        result = [],
+        i;
+
+    for (i = 0; i < length; i++) {
+        result.push(arr[`col${i + 1}`]);
+    }
+
+    return result;
+};
+var sidebarOpen = false;
+function sidebar() {
+    if (sidebarOpen == false) {
+        var oI = q.get("#openIcon").firstChild
+        oI.classList.add("rotate180")
+        var sett = q.get(".settings")
+        sett.classList.remove("settings-hidden")
+        sidebarOpen = true;
+    } else if (sidebarOpen) {
+        var oI = q.get("#openIcon").firstChild
+        oI.classList.remove("rotate180")
+        var sett = q.get(".settings")
+        sett.classList.add("settings-hidden")
+        sidebarOpen = false
+    }
+}
+function updateRUColors(){
+    if(undo.length == 0)q.get("#undoIcon").style.opacity = "20%";
+    if(redo.length == 0)q.get("#redoIcon").style.opacity = "20%";
+    if(undo.length != 0)q.get("#undoIcon").style.opacity = "100%";
+    if(redo.length != 0)q.get("#redoIcon").style.opacity = "100%";
 }
