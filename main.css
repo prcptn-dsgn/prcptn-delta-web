@@ -129,6 +129,7 @@ input[type="text"] {
     transform: translate(-15vw);
 }
 
+input[type="text"] {text-transform:uppercase}
 .header {
     font-family: 'montserrat', sans-serif;
 }
@@ -155,7 +156,6 @@ input[type="text"] {
     opacity: 0;
     transform: translate(5%, 0);
 }
-
 @media only screen and (orientation:landscape) {
     .openIcon {
         visibility: hidden;
@@ -177,7 +177,7 @@ input[type="text"] {
     .s-icon {
         font-size: max(2vw, 24px);
         position: absolute;
-        bottom: max(.5vh, 4px);
+        top: max(9.5vw, 108px);
         right: max(1vh, 7px);
     }
 

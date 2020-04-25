@@ -559,10 +559,10 @@ function openTint(e) {
     var id = e.parentElement.id;
     var hsl = hexToHSL(cols[id])
     var locked = cLocked[id]
-    if (locked == false) {
-        tint.open(`hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`);
+    if (locked) {
+        
     } else {
-        id = ""
+        tint.open(`hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`);
     }
     window.addEventListener('tintdone', e => {
         color = tint.get().replace("hsl(", "").replace(")", "").replace(/%/g, "").split(",");
