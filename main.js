@@ -163,6 +163,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 function HSLToHex(h, s, l) {
+    if(h==360)h=0;
     s /= 100;
     l /= 100;
 
@@ -566,6 +567,7 @@ function openTint(e) {
     }
     window.addEventListener('tintdone', e => {
         color = tint.get().replace("hsl(", "").replace(")", "").replace(/%/g, "").split(",");
+        
         setColors(color, id)
         tint.close()
         id = ""
