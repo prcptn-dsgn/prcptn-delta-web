@@ -16,9 +16,7 @@
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="https://unpkg.com/tippy.js@5/dist/backdrop.css" />
         <link href="https://fonts.googleapis.com/css?family=Courier+Prime:400,700&display=swap" rel="stylesheet">
-        <link rel="icon" 
-      type="image/png" 
-      href="delta-01.png">
+        <link rel="icon" type="image/png" href="delta-01.png">
 </head>
 
 <body onload="load()" id="owowo">
@@ -28,58 +26,73 @@
                 <div class="colors">
                         <div class="col-picker-wrapper hovfx" id="col1">
                                 <div onclick="openTint(this)" id="swatch1" class="swatch" onchange="swatchUpdate()"
-                                        style="background-color:red;">
-                                        
+                                        style="background-color:red;" id="placeholder">
+
                                 </div>
-                                <div class="s-icon">
-                                        <i class="fas fa-lock-open" onclick="lockSwatch(1)" id="lockIcon1"
-                                                style="color:black"
-                                                data-tippy-content="lock color"></i>
+                                <div id="icon1">
+                                        <div class="s-icon"><i class="fas fa-lock-open" id="lockIcon1" onclick="lockSwatch(1)" data-tippy-content="lock color"></i></div>
+                                        <div class="u-icon"><i class="fas fa-sort-up" onclick="moveUp(this)" data-tippy-content="move color"></i></div>
+                                        <div class="d-icon"><i class="fas fa-sort-down" onclick="moveDown(this)" data-tippy-content="move color"></i></div>
                                 </div>
                                 <input type="text" name="" id="tex1" onchange="hexUpdate(1)">
                         </div>
                         <div class="col-picker-wrapper hovfx" id="col2">
                                 <div onclick="openTint(this)" id="swatch2" class="swatch" onchange="swatchUpdate()">
-                                        
-                                </div><div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(2)"
-                                        id="lockIcon2"
-                                        data-tippy-content="lock color"></i></div>
+
+                                </div>
+                                <div id="icon2">
+                                        <div class="s-icon"><i class="fas fa-lock-open" id="lockIcon2" onclick="lockSwatch(2)" data-tippy-content="lock color"></i></div>
+                                        <div class="u-icon"><i class="fas fa-sort-up" onclick="moveUp(this)" data-tippy-content="move color"></i></div>
+                                        <div class="d-icon"><i class="fas fa-sort-down" onclick="moveDown(this)" data-tippy-content="move color"></i></div>
+                                </div>
+
 
                                 <input type="text" name="" id="tex2" onchange="hexUpdate(2)">
                         </div>
                         <div class="col-picker-wrapper hovfx" id="col3">
                                 <div onclick="openTint(this)" id="swatch3" class="swatch" onchange="swatchUpdate()">
-                                        
-                                </div><div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(3)"
-                                        id="lockIcon3"
-                                        data-tippy-content="lock color"></i></div>
+
+                                </div>
+                                <div id="icon3">
+                                        <div class="s-icon"><i class="fas fa-lock-open" id="lockIcon3" onclick="lockSwatch(3)" data-tippy-content="lock color"></i></div>
+                                        <div class="u-icon"><i class="fas fa-sort-up" onclick="moveUp(this)" data-tippy-content="move color"></i></div>
+                                        <div class="d-icon"><i class="fas fa-sort-down" onclick="moveDown(this)" data-tippy-content="move color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex3" onchange="hexUpdate(3)">
                         </div>
                         <div class="col-picker-wrapper hovfx" id="col4">
                                 <div onclick="openTint(this)" id="swatch4" class="swatch" onchange="swatchUpdate()">
-                                        
-                                </div><div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(4)"
-                                        id="lockIcon4"
-                                        data-tippy-content="lock color"></i></div>
+
+                                </div>
+                                <div id="icon4">
+                                        <div class="s-icon"><i class="fas fa-lock-open" id="lockIcon4" onclick="lockSwatch(4)" data-tippy-content="lock color"></i></div>
+                                        <div class="u-icon"><i class="fas fa-sort-up" onclick="moveUp(this)" data-tippy-content="move color"></i></div>
+                                        <div class="d-icon"><i class="fas fa-sort-down" onclick="moveDown(this)" data-tippy-content="move color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex4" onchange="hexUpdate(4)">
                         </div>
                         <div class="col-picker-wrapper hovfx" id="col5">
                                 <div onclick="openTint(this)" id="swatch5" class="swatch" onchange="swatchUpdate()">
-                                        
-                                </div><div class="s-icon"><i class="fas fa-lock-open" onclick="lockSwatch(5)"
-                                        id="lockIcon5"
-                                        data-tippy-content="lock color"></i></div>
+
+                                </div>
+                                <div id="icon5">
+                                        <div class="s-icon"><i class="fas fa-lock-open" id="lockIcon5" onclick="lockSwatch(5)" data-tippy-content="lock color"></i></div>
+                                        <div class="u-icon"><i class="fas fa-sort-up" onclick="moveUp(this)" data-tippy-content="move color"></i></div>
+                                        <div class="d-icon"><i class="fas fa-sort-down" onclick="moveDown(this)" data-tippy-content="move color"></i></div>
+                                </div>
                                 <input type="text" name="" id="tex5" onchange="hexUpdate(5)">
                         </div>
                 </div>
                 <div class="settings settings-hidden">
-                        <div id="openIcon" class="openIcon" onclick="sidebar()"><i class="fas fa-long-arrow-alt-left"id="openIcon"></i></div>
+                        <!--<div id="openIcon" class="openIcon" onclick="sidebar()"><i class="fas fa-long-arrow-alt-left"
+                                        id="openIcon"></i></div>-->
                         <div class="icon"><i class="fas fa-sync-alt" onclick="check()" id="dynIcon"
                                         data-tippy-content="turn on dynamic mode"></i></div>
                         <div class="icon"><i class="fas fa-dice animated fast" onclick="rand()" id="randIcon"
                                         data-tippy-content="randomize palette"></i></div>
                         <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()"
-                                        id="branIcon" data-tippy-content="create smart palette (experimental)"></i></div>
+                                        id="branIcon" data-tippy-content="create smart palette (experimental)"></i>
+                        </div>
                         <!---<div class="icon"><i class="fas fa-file-download" onclick="exportOpen()" id="exportIcon"
                                         data-tippy-content="export"></i><i class="fas fa-sort-down downIcon"
                                         id="exportDownIcon" onclick="exportClose()"></i></div>-->
@@ -100,9 +113,9 @@
 
                 </div>
         </div>
-    </div>
+        </div>
 
-    
+
 
 
         <script src="https://unpkg.com/popper.js@1"></script>

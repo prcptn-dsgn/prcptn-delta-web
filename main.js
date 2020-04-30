@@ -49,11 +49,11 @@ function updateSwatches() {
     q.get("#tex3").value = cols.col3;
     q.get("#tex4").value = cols.col4;
     q.get("#tex5").value = cols.col5;
-    q.get("#lockIcon1").style.color = getContrast(cols.col1);
-    q.get("#lockIcon2").style.color = getContrast(cols.col2);
-    q.get("#lockIcon3").style.color = getContrast(cols.col3);
-    q.get("#lockIcon4").style.color = getContrast(cols.col4);
-    q.get("#lockIcon5").style.color = getContrast(cols.col5);
+    q.get("#icon1").style.color = getContrast(cols.col1);
+    q.get("#icon2").style.color = getContrast(cols.col2);
+    q.get("#icon3").style.color = getContrast(cols.col3);
+    q.get("#icon4").style.color = getContrast(cols.col4);
+    q.get("#icon5").style.color = getContrast(cols.col5);
     addUndo()
     resetRedo()
     updateRUColors()
@@ -69,11 +69,11 @@ function updateWOundo() {
     q.get("#tex3").value = cols.col3;
     q.get("#tex4").value = cols.col4;
     q.get("#tex5").value = cols.col5;
-    q.get("#lockIcon1").style.color = getContrast(cols.col1);
-    q.get("#lockIcon2").style.color = getContrast(cols.col2);
-    q.get("#lockIcon3").style.color = getContrast(cols.col3);
-    q.get("#lockIcon4").style.color = getContrast(cols.col4);
-    q.get("#lockIcon5").style.color = getContrast(cols.col5);
+    q.get("#icon1").style.color = getContrast(cols.col1);
+    q.get("#icon2").style.color = getContrast(cols.col2);
+    q.get("#icon3").style.color = getContrast(cols.col3);
+    q.get("#icon4").style.color = getContrast(cols.col4);
+    q.get("#icon5").style.color = getContrast(cols.col5);
     updateRUColors()
 }
 
@@ -163,7 +163,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 function HSLToHex(h, s, l) {
-    if(h==360)h=0;
+    if (h == 360) h = 0;
     s /= 100;
     l /= 100;
 
@@ -263,7 +263,7 @@ function copyUrl() {
     setTimeout(function () {
         linkIcon.classList.remove("pos-down");
     }, 100);
-    
+
     alert("url copied successfully!");
 }
 
@@ -283,11 +283,11 @@ function createSmartPalette() {
     var c4 = hexToRgb(cols.col4);
     var c5 = hexToRgb(cols.col5);
     var input = [];
-    if(cLocked.col1)input.push([c1.r,c1.g,c1.b]); else input.push("N")
-    if(cLocked.col2)input.push([c2.r,c2.g,c2.b]); else input.push("N")
-    if(cLocked.col3)input.push([c3.r,c3.g,c3.b]); else input.push("N")
-    if(cLocked.col4)input.push([c4.r,c4.g,c4.b]); else input.push("N")
-    if(cLocked.col5)input.push([c5.r,c5.g,c5.b]); else input.push("N")
+    if (cLocked.col1) input.push([c1.r, c1.g, c1.b]); else input.push("N")
+    if (cLocked.col2) input.push([c2.r, c2.g, c2.b]); else input.push("N")
+    if (cLocked.col3) input.push([c3.r, c3.g, c3.b]); else input.push("N")
+    if (cLocked.col4) input.push([c4.r, c4.g, c4.b]); else input.push("N")
+    if (cLocked.col5) input.push([c5.r, c5.g, c5.b]); else input.push("N")
     var data = {
         model: "default"
     }
@@ -299,11 +299,11 @@ function createSmartPalette() {
         if (http.readyState == 4 && http.status == 200) {
             palette = JSON.parse(http.responseText).result;
             cols = {
-                col1:RGBToHex(palette[0][0],palette[0][1],palette[0][2]),
-                col2:RGBToHex(palette[1][0],palette[1][1],palette[1][2]),
-                col3:RGBToHex(palette[2][0],palette[2][1],palette[2][2]),
-                col4:RGBToHex(palette[3][0],palette[3][1],palette[3][2]),
-                col5:RGBToHex(palette[4][0],palette[4][1],palette[4][2]),
+                col1: RGBToHex(palette[0][0], palette[0][1], palette[0][2]),
+                col2: RGBToHex(palette[1][0], palette[1][1], palette[1][2]),
+                col3: RGBToHex(palette[2][0], palette[2][1], palette[2][2]),
+                col4: RGBToHex(palette[3][0], palette[3][1], palette[3][2]),
+                col5: RGBToHex(palette[4][0], palette[4][1], palette[4][2]),
             }
             updateSwatches()
         }
@@ -421,7 +421,7 @@ function updateMode() {
         document.documentElement.style.setProperty('--bgc', '#ebebebd0');
         document.documentElement.style.setProperty('--col', '#808080');
         document.documentElement.style.setProperty('--bg', 'white');
-        
+
         document.documentElement.style.setProperty('--abg', '#160f1d');
 
     }
@@ -441,11 +441,11 @@ tippy('[data-tippy-content]', {
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
     } : null;
-  }
+}
 function RGBToHex(r, g, b) {
     r = r.toString(16);
     g = g.toString(16);
@@ -476,28 +476,28 @@ function lockSwatch(swatchNum) {
 }
 function getContrast(hexcolor) {
 
-	// If a leading # is provided, remove it
-	if (hexcolor.slice(0, 1) === '#') {
-		hexcolor = hexcolor.slice(1);
-	}
+    // If a leading # is provided, remove it
+    if (hexcolor.slice(0, 1) === '#') {
+        hexcolor = hexcolor.slice(1);
+    }
 
-	// If a three-character hexcode, make six-character
-	if (hexcolor.length === 3) {
-		hexcolor = hexcolor.split('').map(function (hex) {
-			return hex + hex;
-		}).join('');
-	}
+    // If a three-character hexcode, make six-character
+    if (hexcolor.length === 3) {
+        hexcolor = hexcolor.split('').map(function (hex) {
+            return hex + hex;
+        }).join('');
+    }
 
-	// Convert to RGB value
-	var r = parseInt(hexcolor.substr(0,2),16);
-	var g = parseInt(hexcolor.substr(2,2),16);
-	var b = parseInt(hexcolor.substr(4,2),16);
+    // Convert to RGB value
+    var r = parseInt(hexcolor.substr(0, 2), 16);
+    var g = parseInt(hexcolor.substr(2, 2), 16);
+    var b = parseInt(hexcolor.substr(4, 2), 16);
 
-	// Get YIQ ratio
-	var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    // Get YIQ ratio
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 
-	// Check contrast
-	return (yiq >= 128) ? 'black' : 'white';
+    // Check contrast
+    return (yiq >= 128) ? 'black' : 'white';
 
 };
 function exportOpen() {
@@ -561,13 +561,13 @@ function openTint(e) {
     var hsl = hexToHSL(cols[id])
     var locked = cLocked[id]
     if (locked) {
-        
+
     } else {
         tint.open(`hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`);
     }
     window.addEventListener('tintdone', e => {
         color = tint.get().replace("hsl(", "").replace(")", "").replace(/%/g, "").split(",");
-        
+
         setColors(color, id)
         tint.close()
         id = ""
@@ -674,9 +674,43 @@ function sidebar() {
         sidebarOpen = false
     }
 }
-function updateRUColors(){
-    if(undo.length == 0)q.get("#undoIcon").style.opacity = "20%";
-    if(redo.length == 0)q.get("#redoIcon").style.opacity = "20%";
-    if(undo.length != 0)q.get("#undoIcon").style.opacity = "100%";
-    if(redo.length != 0)q.get("#redoIcon").style.opacity = "100%";
+function updateRUColors() {
+    if (undo.length == 0) q.get("#undoIcon").style.opacity = "20%";
+    if (redo.length == 0) q.get("#redoIcon").style.opacity = "20%";
+    if (undo.length != 0) q.get("#undoIcon").style.opacity = "100%";
+    if (redo.length != 0) q.get("#redoIcon").style.opacity = "100%";
 }
+function moveDown(el) {
+    var e = parseInt(el.parentElement.parentElement.id.match(/\d+/g), 10);
+    if (cols["col" + (e + 1)] != null) {
+        var oldO = cols["col" + e];
+        var newO = cols["col" + (e + 1)];
+        q.c.log("col" + (e + 1));
+        cols["col" + e] = newO;
+        cols["col" + (e + 1)] = oldO;
+        updateSwatches()
+    }
+}
+function moveUp(el) {
+    var e = parseInt(el.parentElement.parentElement.id.match(/\d+/g), 10);
+    if (cols["col" + (e - 1)] != null) {
+        q.c.log("wwwwww");
+        var oldO = cols["col" + e];
+        var newO = cols["col" + (e - 1)];
+        q.c.log("col" + (e + 1));
+        cols["col" + e] = newO;
+        cols["col" + (e - 1)] = oldO;
+        updateSwatches()
+    }
+}
+
+
+let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+// We listen to the resize event
+window.addEventListener('resize', () => {
+    // We execute the same script as before
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    q.c.log(vh)
+  });

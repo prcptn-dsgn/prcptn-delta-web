@@ -6,6 +6,7 @@
     --bg: white;
     /*white, #160f1d*/
     --abg: white;
+    --vh: 0;
 }
 #input{
     opacity: 0;
@@ -14,6 +15,8 @@
 body {
     font-family: 'Varela Round', sans-serif;
     overflow-x: hidden;
+    overflow: hidden;
+    overflow-x: hidden!important;
 }
 
 input[type="text"] {
@@ -79,17 +82,18 @@ input[type="text"] {
     transform: translate(5%, 0);
 }
 
-.s-icon {
+.s-icon, .u-icon, .d-icon {
     position: absolute;
     opacity: .3;
     transition: 0.2s opacity, 0.2s color;
 }
 
-.s-icon:hover {
+.s-icon:hover, .u-icon:hover, .d-icon:hover {
     opacity: .6;
     text-transform: uppercase;
 
 }
+
 
 .clickable {
     box-shadow: inset 0 -.5vh rgb(111, 0, 255);
@@ -163,13 +167,13 @@ input[type="text"] {text-transform:uppercase}
         pointer-events: none;
         position: absolute;
     }
-    .s-icon {
+    .s-icon, .u-icon, .b-icon {
         position: absolute;
         opacity: .3;
         transition: 0.2s opacity, 0.2s color;
     }
 
-    .s-icon:hover {
+    .s-icon:hover, .u-icon:hover, .b-icon:hover {
         opacity: .6;
 
     }
@@ -178,6 +182,20 @@ input[type="text"] {text-transform:uppercase}
         font-size: max(2vw, 24px);
         position: absolute;
         top: max(9.5vw, 108px);
+        right: max(1vh, 7px);
+    }
+    .u-icon {
+        transform: rotate(-90deg);
+        font-size: max(2vw, 24px);
+        position: absolute;
+        top: max(5vw, 50px);
+        left: max(1.5vh, 12px);
+    }
+    .d-icon {
+        transform: rotate(-90deg);
+        font-size: max(2vw, 24px);
+        position: absolute;
+        top: max(5vw, 50px);
         right: max(1vh, 7px);
     }
 
@@ -416,6 +434,10 @@ input[type="text"] {text-transform:uppercase}
 
 }
 @media only screen and (orientation:portrait) {
+    .fa-sort-up{
+        right:0;
+        top:0;
+    }
     .s-icon {
         position: absolute;
         font-size: max(2vw, 24px);
@@ -425,8 +447,26 @@ input[type="text"] {text-transform:uppercase}
         transition: 0.2s opacity, 0.2s color;
         z-index: 100;
     }
+    .u-icon {
+        position: absolute;
+        font-size: max(3vw, 32px);
+        top: max(1vh, 10px);
+        left: max(1vw, 5px);
+        opacity: .3;
+        transition: 0.2s opacity, 0.2s color;
+        z-index: 100;
+    }
+    .d-icon {
+        position: absolute;
+        font-size: max(3vw, 32px);
+        bottom: max(4.5vh, 40px);
+        left: max(1vw, 5px);
+        opacity: .3;
+        transition: 0.2s opacity, 0.2s color;
+        z-index: 100;
+    }
 
-    .s-icon:hover {
+    .s-icon:hover, .u-icon:hover, .b-icon:hover {
         opacity: .6;
 
     }
@@ -434,10 +474,10 @@ input[type="text"] {text-transform:uppercase}
     .swatch {
         position: relative;
         width: 100vw;
-        height: 18vh;
+        height: 100%;
         min-width: 140px;
         min-height: 40px;
-        transition: 0.4s background;
+        transition: 0.4s background, 0.4s height;
     }
 
     input[type="text"] {
@@ -449,7 +489,7 @@ input[type="text"] {text-transform:uppercase}
         border: none;
         padding-top: 1vh;
         padding-bottom: 1vh;
-        border-radius: 0px .5vw 0px 0px;
+        border-radius: 0px max(.5vw, 5px) 0px 0px;
         text-align: center;
         outline: none;
         font-size: max(1vh, 20px);
@@ -462,14 +502,18 @@ input[type="text"] {text-transform:uppercase}
 
     .col-picker-wrapper {
         position: relative;
+        display: flex;
+        height: 20%;
         width: 100vw;
         min-width: 140px;
-        transition: background 0.4s;
+        transition: background 0.4s, 0.4s height;
         overflow: hidden;
         margin:0;
     }
 
     .colors{
+        height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
+        height: calc(var(--vh, 1vh) * 100);
         width: fit-content;
         margin: auto;
     }
@@ -479,8 +523,9 @@ input[type="text"] {text-transform:uppercase}
         top:0;
         height: 100vh;
         background: var(--bg);
-        width: 5vw;
-        min-width: 75px;
+        width: 4.75vw;
+        min-width: 67px;
+        font-size: max(2.5vw, 27px);
         transition:transform 0.2s;
         transition-timing-function: ease-in-out;
         -webkit-user-select: none;
@@ -493,11 +538,8 @@ input[type="text"] {text-transform:uppercase}
         /* Standard */
     }
 
-    .settings-hidden {
-        transform:translateX(max(5vw,75px));
-    }
 
-    .main {
+    .main {height: 100vh;overflow-x: hidden;
     }
 
     .inline {
@@ -508,6 +550,8 @@ input[type="text"] {text-transform:uppercase}
         font-size: max(2.5vw, 30px);
         background: var(--bg);
         color: var(--col);
+        overflow: hidden;
+        overflow-x: hidden;
     }
 
     .pos-down {
@@ -531,11 +575,11 @@ input[type="text"] {text-transform:uppercase}
     }
 
     .icon {
-        width: 5vw;
-        min-width: 75px;
+        width: 4.75vw;
+        min-width: 67px;
         text-align: center;
         display: inline-block;
-        margin-top: max(2vh, 40px);
+        margin-top: max(1.75vh, 30px);
     }
     .openIcon {
         top:40%;
