@@ -714,3 +714,38 @@ window.addEventListener('resize', () => {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     q.c.log(vh)
   });
+
+
+
+
+
+
+  var cMode = 'pop';
+            
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  var colors_index = {
+      'poo': {2:0, 3:0, 4:0, 5:0},
+      'pop': {2:0, 3:0, 4:0, 5:0}
+  }
+  var current_num = 5;
+
+  function qoolor(){
+      colors_index[cMode][current_num] = getRandomInt(colors[cMode][current_num].length);
+      if(colors_index[cMode][current_num] >= colors[cMode][current_num].length){
+          colors_index[cMode][current_num] = 0;
+      }
+      
+      var p = colors[cMode][current_num][colors_index[cMode][current_num]];
+      
+      var background = 'rgb('+p[0][0]+','+p[0][1]+','+p[0][2]+')';
+      var foreground = 'rgb('+p[1][0]+','+p[1][1]+','+p[1][2]+')';
+      for (let i = 0; i < 5; i++) {
+          
+        if (cLocked[`col${i + 1}`] == false) {
+          cols[`col${i+1}`] = RGBToHex(p[i][0],p[i][1],p[i][2])
+        }
+      }
+      updateSwatches()
+  }     
