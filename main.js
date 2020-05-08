@@ -730,7 +730,6 @@ window.addEventListener('resize', () => {
       'pop': {2:0, 3:0, 4:0, 5:0}
   }
   var current_num = 5;
-
   function qoolor(){
       colors_index[cMode][current_num] = getRandomInt(colors[cMode][current_num].length);
       if(colors_index[cMode][current_num] >= colors[cMode][current_num].length){
@@ -748,4 +747,4 @@ window.addEventListener('resize', () => {
         }
       }
       updateSwatches()
-  }     
+  }
