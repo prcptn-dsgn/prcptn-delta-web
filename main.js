@@ -44,6 +44,11 @@ function updateSwatches() {
     q.get("#col3").childNodes[1].style.background = cols.col3;
     q.get("#col4").childNodes[1].style.background = cols.col4;
     q.get("#col5").childNodes[1].style.background = cols.col5;
+    q.get("#col1").style.background = cols.col1;
+    q.get("#col2").style.background = cols.col2;
+    q.get("#col3").style.background = cols.col3;
+    q.get("#col4").style.background = cols.col4;
+    q.get("#col5").style.background = cols.col5;
     q.get("#tex1").value = cols.col1;
     q.get("#tex2").value = cols.col2;
     q.get("#tex3").value = cols.col3;
@@ -64,6 +69,11 @@ function updateWOundo() {
     q.get("#col3").childNodes[1].style.background = cols.col3;
     q.get("#col4").childNodes[1].style.background = cols.col4;
     q.get("#col5").childNodes[1].style.background = cols.col5;
+    q.get("#col1").style.background = cols.col1;
+    q.get("#col2").style.background = cols.col2;
+    q.get("#col3").style.background = cols.col3;
+    q.get("#col4").style.background = cols.col4;
+    q.get("#col5").style.background = cols.col5;
     q.get("#tex1").value = cols.col1;
     q.get("#tex2").value = cols.col2;
     q.get("#tex3").value = cols.col3;
@@ -556,23 +566,102 @@ function exportFile(format) {
             exporter.exportImage(format, colors, colors.join('-'));
     }
 }
+var id="";
+// Simple example, see optional options for more configuration.
+const pickr = Pickr.create({
+    el: '#pickr',
+    theme: 'classic', // or 'monolith', or 'nano'
+    container: 'body',
+    appClass: 'pickr-absolute',
+    swatches: [
+        'rgb(244, 67, 54)',
+        'rgb(233, 30, 99)',
+        'rgb(156, 39, 176)',
+        'rgb(103, 58, 183)',
+        'rgb(63, 81, 181)',
+        'rgb(33, 150, 243)',
+        'rgb(3, 169, 244)',
+        'rgb(0, 188, 212)',
+        'rgb(0, 150, 136)',
+        'rgb(76, 175, 80)',
+        'rgb(139, 195, 74)',
+        'rgb(205, 220, 57)',
+        'rgb(255, 235, 59)',
+        'rgb(255, 193, 7)'
+    ],
+    lockOpacity: true,
+    components: {
+
+        // Main components
+        preview: true,
+        opacity: true,
+        hue: true,
+
+        // Input / output Options
+        interaction: {
+            hex: true,
+            rgba: true,
+            hsla: true,
+            hsva: true,
+            cmyk: true,
+            input: true,
+            clear: false,
+            save: true,
+            cancel:true
+        }
+    },
+    // Translations, these are the default values.
+    i18n: {
+
+        // Strings visible in the UI
+       'ui:dialog': 'color picker dialog',
+       'btn:toggle': 'toggle color picker dialog',
+       'btn:swatch': 'color swatch',
+       'btn:last-color': 'use previous color',
+       'btn:save': 'Save',
+       'btn:cancel': 'Cancel',
+       'btn:clear': 'Clear',
+
+       // Strings used for aria-labels
+       'aria:btn:save': 'save and close',
+       'aria:btn:cancel': 'cancel and close',
+       'aria:btn:clear': 'clear and close',
+       'aria:input': 'color input field',
+       'aria:palette': 'color selection area',
+       'aria:hue': 'hue selection slider',
+       'aria:opacity': 'selection slider'
+    }
+});
 function openTint(e) {
-    var id = e.parentElement.id;
+    id = e.parentElement.id;
     var hsl = hexToHSL(cols[id])
     var locked = cLocked[id]
     if (locked) {
-
+        return
     } else {
-        tint.open(`hsl(${hsl.h},${hsl.s}%,${hsl.l}%)`);
-    }
+        pickr.setColor(cols[id]);
+        pickr.show()
+    }/*
     window.addEventListener('tintdone', e => {
         color = tint.get().replace("hsl(", "").replace(")", "").replace(/%/g, "").split(",");
 
         setColors(color, id)
+        console.log(color)
         tint.close()
         id = ""
+    });*/
+    pickr.on('save', (color, instance) => {
+        console.log(color.toHSLA());
+        setColors(color.toHSLA(), id)
+        console.log(instance);
+        pickr.hide()
+    });
+    pickr.on('cancel', (instance) => {
+        console.log("cancel");
+        pickr.hide()
     });
 }
+
 function setColors(h, e) {
     if (checked) {
         var oldHsl = hexToHSL(cols[e]);
@@ -706,45 +795,59 @@ function moveUp(el) {
 
 
 let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 // We listen to the resize event
 window.addEventListener('resize', () => {
     // We execute the same script as before
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     q.c.log(vh)
-  });
+});
 
+var cMode = 'pop';
 
-
-
-
-
-  var cMode = 'pop';
-            
-  function getRandomInt(max) {
+function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-  }
-  var colors_index = {
-      'poo': {2:0, 3:0, 4:0, 5:0},
-      'pop': {2:0, 3:0, 4:0, 5:0}
-  }
-  var current_num = 5;
-  function qoolor(){
-      colors_index[cMode][current_num] = getRandomInt(colors[cMode][current_num].length);
-      if(colors_index[cMode][current_num] >= colors[cMode][current_num].length){
-          colors_index[cMode][current_num] = 0;
-      }
-      
-      var p = colors[cMode][current_num][colors_index[cMode][current_num]];
-      
-      var background = 'rgb('+p[0][0]+','+p[0][1]+','+p[0][2]+')';
-      var foreground = 'rgb('+p[1][0]+','+p[1][1]+','+p[1][2]+')';
-      for (let i = 0; i < 5; i++) {
-          
+}
+var colors_index = {
+    'poo': { 2: 0, 3: 0, 4: 0, 5: 0 },
+    'pop': { 2: 0, 3: 0, 4: 0, 5: 0 }
+}
+var current_num = 5;
+function qoolor() {
+    colors_index[cMode][current_num] = getRandomInt(colors[cMode][current_num].length);
+    if (colors_index[cMode][current_num] >= colors[cMode][current_num].length) {
+        colors_index[cMode][current_num] = 0;
+    }
+
+    var p = colors[cMode][current_num][colors_index[cMode][current_num]];
+
+    var background = 'rgb(' + p[0][0] + ',' + p[0][1] + ',' + p[0][2] + ')';
+    var foreground = 'rgb(' + p[1][0] + ',' + p[1][1] + ',' + p[1][2] + ')';
+    for (let i = 0; i < 5; i++) {
+
         if (cLocked[`col${i + 1}`] == false) {
-          cols[`col${i+1}`] = RGBToHex(p[i][0],p[i][1],p[i][2])
+            cols[`col${i + 1}`] = RGBToHex(p[i][0], p[i][1], p[i][2])
         }
-      }
-      updateSwatches()
-  }
+    }
+    updateSwatches()
+}
+
+let root = document.documentElement;
+function set(a,b){
+    root.style.setProperty(a,b)}
+
+document.querySelector(".pickr").style.position = "absolute";
+document.querySelector(".pickr").style.pointerEvents = "none";
+document.querySelector(".pickr").style.opacity = 0;
+function compact(){
+    if(q.get("#compIcon").hasClass("fa-pause")){
+        set("--compact",0)
+        q.get("#compIcon").toggleClass("fa-pause")
+        q.get("#compIcon").toggleClass("fa-stop")
+    }else if(!q.get("#compIcon").hasClass("fa-pause")){
+        set("--compact",1)
+        q.get("#compIcon").toggleClass("fa-pause")
+        q.get("#compIcon").toggleClass("fa-stop")
+    }
+}

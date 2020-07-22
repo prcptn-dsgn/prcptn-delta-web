@@ -17,16 +17,20 @@
         <link rel="stylesheet" href="https://unpkg.com/tippy.js@5/dist/backdrop.css" />
         <link href="https://fonts.googleapis.com/css?family=Courier+Prime:400,700&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="delta-01.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/prcptn-dsgn/qwik/dist/min.js"></script>
 </head>
 
 <body onload="load()" id="owowo">
 
-
         <div class="main">
                 <div class="colors">
+                        
+<div id="pickr"></div>
                         <div class="col-picker-wrapper hovfx" id="col1">
                                 <div onclick="openTint(this)" id="swatch1" class="swatch" onchange="swatchUpdate()"
-                                        style="background-color:red;" id="placeholder">
+                                         id="placeholder">
 
                                 </div>
                                 <div id="icon1">
@@ -39,8 +43,8 @@
                                                         data-tippy-content="move color"></i></div>
                                 </div>
                                 <input type="text" name="" id="tex1" onchange="hexUpdate(1)">
-                        </div>
-                        <div class="col-picker-wrapper hovfx" id="col2">
+                        </div><!--
+                        --><div class="col-picker-wrapper hovfx" id="col2">
                                 <div onclick="openTint(this)" id="swatch2" class="swatch" onchange="swatchUpdate()">
 
                                 </div>
@@ -56,8 +60,8 @@
 
 
                                 <input type="text" name="" id="tex2" onchange="hexUpdate(2)">
-                        </div>
-                        <div class="col-picker-wrapper hovfx" id="col3">
+                        </div><!--
+                        --><div class="col-picker-wrapper hovfx" id="col3">
                                 <div onclick="openTint(this)" id="swatch3" class="swatch" onchange="swatchUpdate()">
 
                                 </div>
@@ -71,8 +75,8 @@
                                                         data-tippy-content="move color"></i></div>
                                 </div>
                                 <input type="text" name="" id="tex3" onchange="hexUpdate(3)">
-                        </div>
-                        <div class="col-picker-wrapper hovfx" id="col4">
+                        </div><!--
+                        --><div class="col-picker-wrapper hovfx" id="col4">
                                 <div onclick="openTint(this)" id="swatch4" class="swatch" onchange="swatchUpdate()">
 
                                 </div>
@@ -86,8 +90,8 @@
                                                         data-tippy-content="move color"></i></div>
                                 </div>
                                 <input type="text" name="" id="tex4" onchange="hexUpdate(4)">
-                        </div>
-                        <div class="col-picker-wrapper hovfx" id="col5">
+                        </div><!--
+                        --><div class="col-picker-wrapper hovfx" id="col5">
                                 <div onclick="openTint(this)" id="swatch5" class="swatch" onchange="swatchUpdate()">
 
                                 </div>
@@ -110,6 +114,8 @@
                                         data-tippy-content="turn on dynamic mode"></i></div>
                         <div class="icon"><i class="fas fa-dice animated fast" onclick="rand()" id="randIcon"
                                         data-tippy-content="randomize palette"></i></div>
+                        <div class="icon" id="compParent"><i class="fas fa-pause animated fast" onclick="compact()" id="compIcon"
+                                        data-tippy-content="toggle compact mode"></i></div>
                         <div class="icon"><i class="fas fa-brain animated fast" onclick="createSmartPalette()"
                                         id="branIcon" data-tippy-content="create smart palette (experimental)"></i>
                         </div>

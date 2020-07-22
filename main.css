@@ -7,6 +7,7 @@
     /*white, #160f1d*/
     --abg: white;
     --vh: 0;
+    --compact: 1;
 }
 #input{
     opacity: 0;
@@ -22,7 +23,12 @@ body {
 input[type="text"] {
     font-family: 'Quicksand', sans-serif;
 }
-
+.pickr{
+    position: absolute;
+}
+.main{
+    position: absolute;
+}
 .clickable {
     box-shadow: inset 0 -.5vh rgb(111, 0, 255);
     transition: 0.4s box-shadow cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -181,7 +187,7 @@ input[type="text"] {text-transform:uppercase}
     .s-icon {
         font-size: max(2vw, 24px);
         position: absolute;
-        top: max(9.5vw, 108px);
+        top: max(9.5vw, 102px);
         right: max(1vh, 7px);
     }
     .u-icon {
@@ -207,15 +213,29 @@ input[type="text"] {text-transform:uppercase}
         min-height: 140px;
         transition: 0.4s background;
     }
-
+    #tex1{
+        border-radius: .8vw calc((var(--compact)) * .8vw) calc((var(--compact)) * .8vw) .8vw;
+        width: calc(((1 - var(--compact)) * 11.875vw) + ((var(--compact)) * 11.25vw));
+        margin:0vw 0vw .5vw .5vw;
+        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 128px));
+    }
+    #tex2, #tex3, #tex4{
+        border-radius: calc((var(--compact)) * .8vw);
+        width: calc(((1 - var(--compact)) * 12.5vw) + ((var(--compact)) * 11.25vw));
+        margin:0vw 0vw .5vw calc(((1 - var(--compact)) * 0vw) + ((var(--compact)) * 0.5vw));
+        min-width: calc(((1 - var(--compact)) * 140px) + ((var(--compact)) * 128px));
+    }
+    #tex5{
+        border-radius: calc((var(--compact)) * .8vw) .8vw .8vw calc((var(--compact)) * .8vw);
+        width: calc(((1 - var(--compact)) * 11.875vw) + ((var(--compact)) * 11.25vw));
+        margin:0 0 .5vw calc(((1 - var(--compact)) * 0vw) + ((var(--compact)) * 0.5vw));
+        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 128px));
+    }
     input[type="text"] {
         display: block;
-        width: 12.5vw;
-        min-width: 140px;
         background: var(--bgc);
         color: var(--col);
         border: none;
-        border-radius: 0vw 0vw 1.2vw 1.2vw;
         padding-top: 1vw;
         padding-bottom: 1vw;
         text-align: center;
@@ -223,24 +243,33 @@ input[type="text"] {text-transform:uppercase}
         font-size: max(1vh, 20px);
     }
 
+    
     input[type="text"]:focus {
         border: none;
         outline: none;
     }
-
+/*?*/
     .col-picker-wrapper {
         position: relative;
         display: inline-block;
         width: 12.5vw;
+        padding: 0;
+        margin: calc(var(--compact) * 0.6vw);
+        margin-bottom:0 !important;
+        padding-bottom:0 !important;
         min-width: 140px;
-        margin: .35vw;
-        border-radius: 1.2vw;
+        border-radius: calc(var(--compact) * 1.2vw);
         transition: background 0.4s;
         overflow: hidden;
     }
-
+    .colors{
+        border-radius: calc((1 - var(--compact)) * 1.2vw);
+        overflow: hidden;
+        height:fit-content;
+        font-size: 0;
+    }
     .hovfx:hover {
-        transform: translateY(-.5vh);
+        transform: translateY(calc(var(--compact) * -.5vh));
         box-shadow: 0px 3vh 2vw rgba(0, 0, 0, 0.048);
     }
 
@@ -254,7 +283,7 @@ input[type="text"] {text-transform:uppercase}
     .colors,
     .settings {
         width: fit-content;
-        margin: auto;
+        margin: 0 auto;
     }
 
     .settings {
@@ -282,7 +311,6 @@ input[type="text"] {text-transform:uppercase}
     }
 
     body {
-        font-size: max(2vw, 30px);
         background: var(--bg);
         color: var(--col);
     }
@@ -291,8 +319,9 @@ input[type="text"] {text-transform:uppercase}
         position: relative;
         transform: translateY(.4vh);
     }
-
+/*?*/
     i {
+        font-size: max(2vw, 30px);
         transition: 0.2s transform;
         transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         cursor: pointer;
@@ -480,7 +509,7 @@ input[type="text"] {text-transform:uppercase}
         transition: 0.4s background, 0.4s height;
     }
 
-    input[type="text"] {
+    #tex1,#tex2,#tex3,#tex4,#tex5 {
         position:absolute;bottom: 0;
         width: 12.5vw;
         min-width: 140px;
@@ -495,7 +524,7 @@ input[type="text"] {text-transform:uppercase}
         font-size: max(1vh, 20px);
     }
 
-    input[type="text"]:focus {
+    #tex1,#tex2,#tex3,#tex4,#tex5:focus {
         border: none;
         outline: none;
     }
@@ -547,7 +576,6 @@ input[type="text"] {text-transform:uppercase}
     }
 
     body {
-        font-size: max(2.5vw, 30px);
         background: var(--bg);
         color: var(--col);
         overflow: hidden;
@@ -560,6 +588,7 @@ input[type="text"] {text-transform:uppercase}
     }
 
     i {
+        font-size: max(2.5vw, 30px);
         transition: 0.2s transform;
         transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         cursor: pointer;
@@ -721,7 +750,11 @@ input[type="text"] {text-transform:uppercase}
         margin-top: 10vh;
         margin-bottom: 5vh;
     }
-
+    #compParent{
+        position: absolute;
+        visibility: hidden;
+        pointer-events: none;
+    }
 }
 
 
