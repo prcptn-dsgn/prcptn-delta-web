@@ -217,19 +217,19 @@ input[type="text"] {text-transform:uppercase}
         border-radius: .8vw calc((var(--compact)) * .8vw) calc((var(--compact)) * .8vw) .8vw;
         width: calc(((1 - var(--compact)) * 11.875vw) + ((var(--compact)) * 11.25vw));
         margin:0vw 0vw .5vw .5vw;
-        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 128px));
+        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 126px));
     }
     #tex2, #tex3, #tex4{
         border-radius: calc((var(--compact)) * .8vw);
         width: calc(((1 - var(--compact)) * 12.5vw) + ((var(--compact)) * 11.25vw));
         margin:0vw 0vw .5vw calc(((1 - var(--compact)) * 0vw) + ((var(--compact)) * 0.5vw));
-        min-width: calc(((1 - var(--compact)) * 140px) + ((var(--compact)) * 128px));
+        min-width: calc(((1 - var(--compact)) * 140px) + ((var(--compact)) * 126px));
     }
     #tex5{
         border-radius: calc((var(--compact)) * .8vw) .8vw .8vw calc((var(--compact)) * .8vw);
         width: calc(((1 - var(--compact)) * 11.875vw) + ((var(--compact)) * 11.25vw));
         margin:0 0 .5vw calc(((1 - var(--compact)) * 0vw) + ((var(--compact)) * 0.5vw));
-        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 128px));
+        min-width: calc(((1 - var(--compact)) * 131px) + ((var(--compact)) * 126px));
     }
     input[type="text"] {
         display: block;
